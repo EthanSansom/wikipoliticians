@@ -1,11 +1,10 @@
 library(tidyverse)
 library(stringr)
 library(dplyr)
+library(here)
 
 # Load Data --------------------------------------------------------------------
-wiki_data_raw <- 
-  read.csv("/Users/ethansansom/Desktop/query.csv") |>
-  as_tibble()
+wiki_data_raw <- read_csv(here("inputs/data/wiki_data_raw.csv"))
 
 # Clean Party Variable ---------------------------------------------------------
 # Define target parties to include in cleaned data
@@ -131,7 +130,7 @@ wiki_data_clean <-
   # Merge indicator variables from multiple observations of each politician
   summarize(
     name = politLabel,
-    gender = gender,
+    gender = genderLabel,
     birthyear = birthyear,
     deathyear = deathyear,
     liberal = as.numeric(0 < sum(liberal)),
@@ -146,10 +145,14 @@ wiki_data_clean <-
     house_member = as.numeric(0 < sum(house_member)),
     mayor = as.numeric(0 < sum(mayor))
   ) |>
+  
+  # Remove duplicate observations
   distinct()
 
-# Label these as missing birth and death dates
-test <- wiki_data_clean |>
+# Resolve Conflicting Birth and Death Dates ------------------------------------
+# Get list of politicians with multiple recorded years of birth/death
+polits_multi_dates <-
+  wiki_data_clean |>
   group_by(polit) |>
   summarize(
     name = name,
@@ -159,8 +162,21 @@ test <- wiki_data_clean |>
   ) |>
   filter(count > 1)
 
+polits_multi_dates <- unique(polits_multi_dates$polit)
 
+# Recode birth/death years of these politicians as NA (missing)
+wiki_data_clean <-
+  wiki_data_clean |>
+  mutate(
+    birthyear = if_else(polit %in% polits_multi_dates, NA_real_, birthyear),
+    deathyear = if_else(polit %in% polits_multi_dates, NA_real_, deathyear)
+  ) |>
+  
+  # Remove duplicate observations of multiple-birth/death year politicians
+  distinct()
 
+# Save Cleaned Data ------------------------------------------------------------
+write_csv(x = wiki_data_clean, file = here("inputs/data/wiki_data_clean.csv"))
 
 
 
