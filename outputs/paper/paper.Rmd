@@ -1,6 +1,13 @@
 ---
-title: "paper"
-output: pdf_document
+title: "Determinents of Canadian Politicians' Popularity on Wikipedia."
+author: "Ethan Sansom"
+date: "6 April 2022"
+output:
+  bookdown::pdf_document2:
+toc: yes
+abstract: "Wikipedia maintains... huge influential database. Researchers are increasingly interested in the ability of Wikipedia to predeict election outcomes and political feels... This paper investigates. It is shown that blank, blank, and blank garner more pageviews."
+thanks: "Code and data are available at: https://github.com/EthanSansom/wikipoliticians"
+bibliography: references.bib
 ---
 
 
