@@ -16,6 +16,8 @@ library(rvest)      # For web-scraping
 # Return the Wikipedia page URL associated with a Wikidata QID
 get_page <- function(qid){
   # Format an API query for the Wikipedia page corresponding to Wikidata qid
+  # Appropriate API request with help from:
+  # https://stackoverflow.com/questions/37079989/how-to-get-wikipedia-page-from-wikidata-id
   prefix <- 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks/urls&ids='
   suffix <- "&sitefilter=enwiki|frwiki"
   response_url <- paste0(prefix, qid, suffix)
@@ -204,7 +206,6 @@ mod <-
   lm(
     formula = page_views ~ . - 1, 
     data = wiki_data |> 
-      filter(prime_minister == 0) |>
       select(
         page_views,
         gender, 
@@ -213,6 +214,7 @@ mod <-
         green, 
         bq, 
         cp, 
+        prime_minister,
         minister,
         house_member,
         senate_member,
