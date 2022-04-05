@@ -1,13 +1,44 @@
 ---
-title: "Determinents of Canadian Politicians' Popularity on Wikipedia."
+title: "Determinants of Canadian Politicians' Popularity on Wikipedia."
 author: "Ethan Sansom"
 date: "6 April 2022"
 output:
   bookdown::pdf_document2:
 toc: yes
-abstract: "Wikipedia maintains... huge influential database. Researchers are increasingly interested in the ability of Wikipedia to predeict election outcomes and political feels... This paper investigates. It is shown that blank, blank, and blank garner more pageviews."
 thanks: "Code and data are available at: https://github.com/EthanSansom/wikipoliticians"
 bibliography: references.bib
+abstract: "Voters internationally are increasingly using the internet as a primary tool to access information on politicians and political parties. Consequently, politcal organizers and researchers alike are using online platforms, such as Twitter, Facebook, and more recenlty Wikipedia, to analyze the sentiments of voters. This paper investigates the correlation between Canadian politicians' characteristics - including party affiliation, political position, age, and gender - and politicians' Wikipedia page views in the months prior to the 2021 Federal Election. Wikipedia page views are found to be greater for politicians in more popular parties, and for Party Leaders, Ministers, and Prime Ministers in particular. \\par \\vspace{3mm} \\textbf {Keywords:} Canada elections, election forecasting, Wikipedia, linear regression"
 ---
 
+```{r setup, include = FALSE}
+# Load Packages ----------------------------------------------------------------
+library(tidyverse)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(here)         # For referencing files in directory
+library(kableExtra)   # For formatting tables
+library(gridExtra)    # For arranging plots
+library(bookdown)     # For cross referencing and citing
+library(ggrepel)      # For adding point labels to plots
+```
+
+# Introduction
+Online search engines are increasingly the avenue by which voters internationally access information on political candidates in their countries. A reported 68% of internet-using voters in Germany, France, Italy, Spain, Poland, the United Kingdom, and the United States, for instance, rated online searches as an important factor in their voting choices [@Pradel]. Such internet usage provides political organizers, pundits, and researchers a wealth of relatively easy to access on the voting preferences and attitudes of the electorate. An increasingly large number of researchers have used name mentions of political parties or individual politicians on social media platforms such as Twitter and Facebook to measure the popularity of politicians and political parties [@Smith; @Yasseri]. Such measures, however, are limited in their predictive abilities of voter behavior. Name mentions alone, for example, do not indicate a positive or negative attitude towards a politician or party [@Yasseri]. Further, investigating social media platforms alone limits the sample of voters investigated to those who both participate in social media and use social media platforms as a venue for communicating political views [@Yasseri]. Pressures to adhere to the political views of social circles, and potential negative outcomes at home or in the workplace of voicing divisive political views on a public platform, can additionally mask or misrepresent the intentions of voters on social media platform [@Yasseri]. Authors @Salem argue that Wikipedia, the online encyclopedia, offers a better platform for accurately modelling voters' intentions. Specifically, the number of views of a given politician's or political party's Wikipedia page over a given time period can provide a strong measure of the number individuals searching for information about the politician or party [@Yasseri; @Salem]. Such information-seeking behavior has been shown to be reflective of the true public voting interest for certain candidates [@Salem]. Wikipedia page viewership, and other Wikipedia page metrics then, may offer a less ambiguous and more predictive measure of voting intent than that of other internet platforms.
+
+To explore the potential of assessing voter behaviors and perceptions using Wikipedia in the context of Canadian elections, this paper investigates the Wikipedia presence and viewership of Canadian politicians from the five major Canadian federal political parties, the Liberal Party, Conservative Party, New Democratic Party (NDP), Green Party, and the Bloc Québécois. Using monthly data on Wikipedia page views from January 1st 2021 to January 1st 2022, this paper performs a multiple linear regression to investigate the correlation between characteristics of Canadian politicians and their Wikipedia page viewership. In particular, variables gender, age, political position, and party affiliation, are used to model the number of Wikipedia page views received by Canadian politicians. Additionally, the page views of Canadian federal party leaders, namely Justin Trudeau (Liberal),	Erin O'Toole (Conservative), Jagmeet Singh (NDP), Annamie Paul (Green), and	Yves-François Blanchet (Bloc Québécois), in the months preceding the 2021 Canadian federal election are compared with the 2021 election results. The Wikipedia page views of party leaders in the months preceding the election are shown to accurately predict the order of party vote share, from most to least votes. In the full sample of Canadian politicians on Wikipedia, it is found that political party affiliation is correlated with Wikipedia viewership. The Wikipedia pages of Green Party and Bloc Québécois politicians are shown to have substantially fewer page views on average than those of politicians in larger parties. Political position, specifically the positions of Prime Minister, Minister, and Party Leader, are shown to be very strongly correlated with page viewership as well.
+
+In the following sections of this paper, a brief description of the data collection and cleaning process is provided, followed by an investigation of the data itself. The Model \@ref(model) section describes the multiple linear regression framework used in this analysis, including a discussion of the model's assumptions and subsequent limitations. In the Results \@ref(results) section, the implications of the model estimates and the results of the data investigation are described. Finally, in the Discussion \@ref(discussion) section, the results are analysed in the context of the 2021 federal election results and the political views of the Canadian electorate more broadly. The paper concludes with a discussion if its limitations, including the challenges to the external validity of the model and the ability of Wikipedia page viewership to serve as a valid proxy for voter interest. For this analysis, the R statistical software [@citeR] is used to import and clean Wikipedia page data, perform regression model estimation and data visualization, and compile the paper itself. Packages `tidyverse` [@citetidyverse] and `dplyr` [@citedplyr] are used to manipulate data, `ggplot2` [@citeggplot2], `gridExtra` [@citegridExtra], and `kableExtra` [@citekableExtra], are used for creating tables and plots, and `ggrepel` [@citeggrepel] is used to customize plot labels. To access web APIs, the package `httr` [@citehttr] is used, and for scraping HTML data the package `rvest` [@citervest] is used. The package `here` [@citehere] is used for to simplify reading and writing data within the file directory. Lastly, packages `bookdown` [@citebookdown], `knitr` [@citeknitr], and `tinytex` [@citetinytex] are utilized to format and compile the final paper.
+
+# Data
+
+# Model
+
+# Results
+
+# Discussion
+
+# Appendix
+
+# References
 
