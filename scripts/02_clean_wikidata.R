@@ -20,7 +20,6 @@ target_parties <-
 # Define parties that contain similar names to, but are not affiliated with, target (or related) parties
 to_remove_parties <-
   c(
-    "Liberal-Conservative Party",
     "Northwest Territories Liberal-Conservative Party",
     "Nationalist Conservative",
     "Liberal Party of Australia",
@@ -34,7 +33,7 @@ to_remove_parties <-
     "United Conservative Party"
   )
 
-# Select only politicians from target parties 
+# Select only politicians from target parties
 wiki_data_clean_party <-
   wiki_data_raw |>
   
@@ -54,6 +53,8 @@ wiki_data_clean_party <-
         str_detect(partyLabel, "(?i)Canadian.*Alliance") ~ "Conservative Party",
         # Reform Party is a predecessor of Canadian Alliance
         str_detect(partyLabel, "(?i)Reform.*Party") ~ "Conservative Party",
+        # Liberal-Conservative Party is predecessor of modern Conservative Party
+        str_detect(partyLabel, "(?i)Liberal-Conservative.*Party") ~ "Conservative Party",
         str_detect(partyLabel, "(?i)Conservative") ~ "Conservative Party",
         str_detect(partyLabel, "(?i)Bloc.*Québécois.") ~ "Bloc Québécois",
         TRUE ~ partyLabel

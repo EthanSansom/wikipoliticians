@@ -70,9 +70,10 @@ http://www.wikidata.org/entity/Q128645,Arthur Meighen,male,1874,1960,0,0,1,0,0,1
 http://www.wikidata.org/entity/Q128655,Robert Borden,male,1854,1937,1,0,1,0,0,1,0,0,0,1,0
 http://www.wikidata.org/entity/Q128664,Wilfrid Laurier,male,1841,1919,1,0,0,0,0,1,0,1,0,1,0
 http://www.wikidata.org/entity/Q128672,Charles Tupper,male,1821,1915,0,0,1,0,0,1,1,0,0,1,0
-http://www.wikidata.org/entity/Q128677,Mackenzie Bowell,male,1823,1917,0,0,1,0,0,1,0,0,1,0,0
+http://www.wikidata.org/entity/Q128677,Mackenzie Bowell,male,1823,1917,1,0,1,0,0,1,0,0,1,0,0
+http://www.wikidata.org/entity/Q128686,John Sparrow David Thompson,male,1845,1894,1,0,0,0,0,1,0,0,0,1,0
 http://www.wikidata.org/entity/Q128696,John Abbott,male,1821,1893,0,0,1,0,0,1,0,0,1,1,1
-http://www.wikidata.org/entity/Q128702,John A. Macdonald,male,1815,1891,0,0,1,0,0,1,0,0,0,1,0
+http://www.wikidata.org/entity/Q128702,John A. Macdonald,male,1815,1891,1,0,1,0,0,1,0,0,0,1,0
 http://www.wikidata.org/entity/Q128708,Alexander Mackenzie,male,1822,1892,1,0,0,0,0,1,0,1,0,1,0
 http://www.wikidata.org/entity/Q1291910,Edward Frederick Clarke,male,1850,1905,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q1292320,Edward Gawler Prior,male,1853,1920,0,0,1,0,0,0,0,0,0,1,0
@@ -80,6 +81,7 @@ http://www.wikidata.org/entity/Q1292911,Ed Lumley,male,1939,NA,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q1292972,James Colebrooke Patterson,male,1839,1929,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1292988,Ted McWhinney,male,1924,2015,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1294585,Jedediah Slason Carvell,male,1832,1894,0,0,1,0,0,0,0,0,1,0,0
+http://www.wikidata.org/entity/Q1302087,Alexander Tilloch Galt,male,1817,1893,1,0,0,0,0,0,1,0,0,1,0
 http://www.wikidata.org/entity/Q1302823,Paul Comtois,male,1895,1966,0,0,1,0,0,0,0,0,0,0,1
 http://www.wikidata.org/entity/Q1304444,Robert Rogers,male,1864,1936,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1312014,Emerson Coatsworth,male,1854,1943,0,0,1,0,0,0,0,0,0,1,1
@@ -107,6 +109,7 @@ http://www.wikidata.org/entity/Q1373480,Eugène Fiset,male,1874,1951,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q1374999,Alexander Campbell,male,1822,1892,0,0,1,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q1376329,William Egbert,male,1857,1936,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q1378274,Peter Lougheed,male,1928,2012,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q1380772,William McDougall,male,1822,1905,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1381136,Alexander Cameron Rutherford,male,1857,1941,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q1382032,Frank Mahovlich,male,1938,NA,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q138593,Benjamin Rogers,male,1837,1923,1,0,0,0,0,0,0,0,0,0,0
@@ -134,6 +137,7 @@ http://www.wikidata.org/entity/Q1451090,François Langelier,male,1838,1915,1,0,0
 http://www.wikidata.org/entity/Q1453063,Frederick Johnson,male,1917,1993,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q1473329,Harlan Carey Brewster,male,1870,1918,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q1477331,Laurier LaPierre,male,1929,2012,1,0,0,0,0,0,0,0,1,0,0
+http://www.wikidata.org/entity/Q1486983,John Christian Schultz,male,1840,1896,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q14915601,James Alexander Calder,male,1868,1956,1,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q14915614,Peter Adams,male,1936,2018,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q14915630,Elmer Ernest Roper,male,1893,1994,0,1,0,0,0,0,0,0,0,0,1
@@ -255,6 +259,7 @@ http://www.wikidata.org/entity/Q1587946,Harvey Veniot,male,1915,2009,0,0,1,0,0,0
 http://www.wikidata.org/entity/Q1593109,Hector-Louis Langevin,male,1826,1906,0,0,1,0,0,0,1,0,0,1,1
 http://www.wikidata.org/entity/Q15946286,Florence Elsie Inman,female,1891,1986,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q15975507,William Sloan,male,1867,1928,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q15979887,John Herron,male,1853,1936,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q15980338,John Stanfield,male,1868,1934,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q15980340,William Ashbury Buchanan,male,1876,1954,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q15980381,Gordon Benjamin Isnor,male,1885,1973,1,0,0,0,0,0,0,0,1,1,0
@@ -442,6 +447,7 @@ http://www.wikidata.org/entity/Q16030793,John Godkin Giles,male,1834,1903,0,0,1,
 http://www.wikidata.org/entity/Q16030811,Gordon Edward Corbould,male,1847,1926,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16030825,John Carey Douglas,male,1874,1926,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q16030827,Joseph Patrick Downey,male,1865,1926,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q16030850,James O'Brien,male,1836,1903,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q16030932,William Wright,male,1853,1926,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16031024,James Massie,male,1833,1904,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16031192,Howard Corning,male,1879,1924,0,0,1,0,0,0,0,0,0,0,0
@@ -469,6 +475,7 @@ http://www.wikidata.org/entity/Q16058851,"Henry Nathan, Jr.",male,1842,1914,1,0,
 http://www.wikidata.org/entity/Q16058977,Samuel Barker,male,1839,1915,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16059282,Thomas George Carscallen,male,1842,1917,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16059348,John Gillis Morrison,male,1863,1917,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q16059351,John O'Brien,male,1847,1917,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16059432,Thomas Edward Manley Chew,male,1874,1928,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16059664,William Beatty,male,1835,1898,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16059706,Simpson McCall,male,1807,1898,1,0,0,0,0,0,0,0,0,0,0
@@ -489,6 +496,7 @@ http://www.wikidata.org/entity/Q16063098,Thomas Scott,male,1828,1883,0,0,1,0,0,0
 http://www.wikidata.org/entity/Q16063122,Léon-Charles Clément,male,1814,1882,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16063325,Patrick Power,male,1815,1881,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16063373,James Evans,male,1848,1880,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q16063469,John Holmes,male,1828,1879,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16063963,Charles Perry,male,1818,1876,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q16063974,Jared C. Troop,male,1837,1876,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q16065523,Mcneil Clarke,male,1838,1872,0,0,1,0,0,0,0,0,0,0,0
@@ -681,6 +689,7 @@ http://www.wikidata.org/entity/Q1677239,Jack Wiebe,male,1936,2007,1,0,0,0,0,0,0,
 http://www.wikidata.org/entity/Q1677284,Jean-Pierre Côté,male,1926,2002,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q1679927,James Albert Manning Aikins,male,1851,1929,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1680169,Larry Campbell,male,1948,NA,1,0,0,0,0,0,0,0,1,0,1
+http://www.wikidata.org/entity/Q1680212,James Cox Aikins,male,NA,NA,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q1685131,Jean-Paul Deschatelets,male,1912,1986,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q1685212,Jean-Pierre Goyer,male,1932,2011,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1685302,Jean-Yves Duclos,male,1965,NA,1,0,0,0,0,0,1,0,0,1,0
@@ -798,6 +807,7 @@ http://www.wikidata.org/entity/Q1896776,Paul Hellyer,male,1923,2021,1,0,1,0,0,0,
 http://www.wikidata.org/entity/Q1899045,Mario Silva,male,1966,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1903142,Martial Asselin,male,1924,2013,0,0,1,0,0,0,0,0,1,0,1
 http://www.wikidata.org/entity/Q19060376,David de Burgh Graham,male,1981,NA,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q1909527,Matthew Henry Richey,male,1828,1911,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q1911361,Maurice Lamontagne,male,1917,1983,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q1911426,Maurice Sauvé,male,1923,1992,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q1927699,Mike Harcourt,male,1943,NA,0,1,0,0,0,0,0,0,0,0,1
@@ -906,6 +916,7 @@ http://www.wikidata.org/entity/Q21175197,Bill Morneau,male,1962,NA,1,0,0,0,0,0,1
 http://www.wikidata.org/entity/Q21175255,Sven Spengemann,male,1966,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q21177259,Gabriel Ste-Marie,male,1980,NA,0,0,0,0,1,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q21178739,Michel Picard,male,1960,NA,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q2119451,Thomas D'Arcy McGee,male,1825,1868,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q21210275,Geng Tan,male,1963,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q21228464,Richard Cannings,male,1954,NA,0,1,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q212651,John J. Bowlen,male,1876,1959,1,0,0,0,0,0,0,0,0,0,0
@@ -990,6 +1001,7 @@ http://www.wikidata.org/entity/Q22005676,Georgina Jolibois,female,1968,NA,0,1,0,
 http://www.wikidata.org/entity/Q22006190,Patricia Lattanzio,female,NA,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22006757,Kelly McCauley,female,1964,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22007401,Kyle Peterson,male,1971,NA,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q220157,Charles Arkoll Boulton,male,1841,1899,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q22080796,Brenda Shanahan,female,1958,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22080816,Rémi Massé,male,1953,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22080839,Stéphane Lauzon,male,1966,NA,1,0,0,0,0,0,0,0,0,1,0
@@ -1055,6 +1067,7 @@ http://www.wikidata.org/entity/Q22280296,Brigitte Sansoucy,female,1963,NA,0,1,0,
 http://www.wikidata.org/entity/Q22280309,Randeep Sarai,male,1975,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22280358,Jamie Schmale,male,NA,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22280366,Deb Schulte,female,1960,NA,1,0,0,0,0,0,1,0,0,1,0
+http://www.wikidata.org/entity/Q222810,Hugh Nelson,male,1830,1893,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q22282329,Anita Vandenbeld,female,1971,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22282385,Salma Zahid,female,NA,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q22442799,Marc Serré,male,1967,NA,1,0,0,0,0,0,0,0,0,1,0
@@ -1164,6 +1177,7 @@ http://www.wikidata.org/entity/Q27663754,Glen Motz,male,1958,NA,0,0,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q27783964,Nathalie Des Rosiers,female,1959,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q27788610,Jeanie Dendys,female,NA,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q27791884,Pauline Frost,female,NA,NA,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q278047,William Pearce Howland,male,1811,1907,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q27805308,Richard Mostyn,male,NA,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q27805309,Nils Clarke,male,NA,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q27805365,Ranj Pillai,male,NA,NA,1,0,0,0,0,0,0,0,0,0,0
@@ -1486,6 +1500,7 @@ http://www.wikidata.org/entity/Q2958524,Charles Benjamin Howard,male,1885,1964,1
 http://www.wikidata.org/entity/Q2958607,Charles Bourgeois,male,1879,1940,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q2958633,Charles Bruno Blondeau,male,1835,1888,1,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q2958642,Charles Burpee,male,1817,1909,1,0,0,0,0,0,0,0,1,1,0
+http://www.wikidata.org/entity/Q2958680,Charles Carroll Colby,male,1827,1907,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q2958708,Charles Champagne,male,1838,1907,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q2958764,Charles Ballantyne,male,1867,1950,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q2958774,Charles Connell,male,1810,1873,1,0,0,0,0,0,0,0,0,1,0
@@ -1776,6 +1791,7 @@ http://www.wikidata.org/entity/Q3086415,Françoise Boivin,female,1960,NA,1,1,0,0
 http://www.wikidata.org/entity/Q3086954,Fred Somers,male,1912,1981,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3087104,Frederick Debartzch Monk,male,1856,1914,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3087108,Frederick Eustace Barker,male,1838,1915,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3087115,Frederick Harding Hale,male,1844,1912,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3087132,Frederick Mackenzie,male,1841,1889,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3087150,Frederick Peters,male,1851,1919,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3087152,Fred Whitman,male,1896,1974,1,0,0,0,0,0,0,0,0,1,0
@@ -1821,7 +1837,7 @@ http://www.wikidata.org/entity/Q3101672,George Johnson Clarke,male,1857,1917,0,0
 http://www.wikidata.org/entity/Q3101730,George Luther Hathaway,male,1813,1872,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3101738,George Manning McDade,male,1893,1966,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3101748,George Stearns,male,1901,1979,0,0,1,0,0,0,0,0,0,1,0
-http://www.wikidata.org/entity/Q3101753,George Valentine McInerney,male,1857,1908,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3101753,George Valentine McInerney,male,1857,1908,1,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3101769,George Moffat Sr.,male,1810,1878,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3101770,George Moffat Jr.,male,1842,1918,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3101882,George Roy McWilliam,male,1905,1977,1,0,0,0,0,0,0,0,0,1,0
@@ -1859,8 +1875,10 @@ http://www.wikidata.org/entity/Q3104875,Ghislain Fournier,male,1938,NA,0,0,0,0,1
 http://www.wikidata.org/entity/Q3104884,Ghislain Lebel,male,1946,NA,0,0,0,0,1,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3105593,Gilbert Barrette,male,1941,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3105704,Gilbert Fillion,male,1940,2007,0,0,0,0,1,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3105735,Gilbert Anselme Girouard,male,1846,1885,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3105813,Gilbert Normand,male,1943,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3105822,Gilbert Parent,male,1935,2009,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3105889,Gilbert Ganong,male,1851,1917,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3105976,Gildas Molgat,male,1927,2001,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3106055,Gilles Perron,male,1940,NA,0,0,0,0,1,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3106095,Gilles Bernier,male,1934,NA,0,0,1,0,0,0,0,0,0,1,0
@@ -1935,6 +1953,7 @@ http://www.wikidata.org/entity/Q3132597,Henry Aylmer,male,1843,1918,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q3132758,Henry Edgarton Allen,male,1864,1924,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3132829,Henry Hicks,male,1915,1990,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3132925,Henry Lovell,male,1828,1907,1,0,0,0,0,0,0,0,0,1,1
+http://www.wikidata.org/entity/Q3133014,Henry Absalom Powell,male,1855,1930,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3133031,Henry Read Emmerson,male,1883,1954,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q3133041,Henry Emmerson,male,1853,1914,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3133073,Henry Simard,male,1836,1895,1,0,0,0,0,0,0,0,0,1,0
@@ -1950,7 +1969,9 @@ http://www.wikidata.org/entity/Q3134202,Hermas Deslauriers,male,1879,1941,1,0,0,
 http://www.wikidata.org/entity/Q3134267,Herménégilde Boulay,male,1861,1942,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3134390,Hervé-Edgar Brunelle,male,1891,1950,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3134598,Hervé Michaud,male,1912,1978,1,0,0,0,0,0,0,0,1,1,0
+http://www.wikidata.org/entity/Q3135526,Hilaire Hurteau,male,1837,1920,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3135557,Hilarion-Pit Lessard,male,1913,1984,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3136096,Hippolyte Montplaisir,male,1839,1927,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q3136197,Hiram Blanchard,male,1820,1874,1,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3138868,Hoang Mai,male,1973,NA,0,1,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3140205,Honoré Achim,male,1881,1950,1,0,1,0,0,0,0,0,0,1,0
@@ -2003,6 +2024,7 @@ http://www.wikidata.org/entity/Q3160898,James Robb,male,1859,1929,1,0,0,0,0,0,0,
 http://www.wikidata.org/entity/Q3160939,James Bezan,male,1965,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3160951,James Boyle Uniacke,male,1799,1858,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3160991,James Colledge Pope,male,1826,1885,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q3160998,James Crocket Wilson,male,1841,1899,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3161011,James David Stewart,male,1874,1933,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3161031,James Domville,male,1842,1921,1,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q3161054,Jack Patterson,male,1884,1964,1,0,0,0,0,0,0,0,0,1,0
@@ -2076,6 +2098,7 @@ http://www.wikidata.org/entity/Q3170447,Jean Auguste Ross,male,1851,1920,1,0,0,0
 http://www.wikidata.org/entity/Q3170455,Jean Augustine,female,1937,NA,1,0,0,0,0,0,1,0,0,1,0
 http://www.wikidata.org/entity/Q3170570,Jean-Baptiste Mongenais,male,1803,1887,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3170872,Jean Boucher,male,1926,2011,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3170938,John George Bourinot,male,1814,1884,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3171417,Jean Corbeil,male,1934,2002,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3171497,Jean Crowder,female,1952,NA,0,1,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3171785,Jean Dorion,male,1942,NA,0,0,0,0,1,0,0,0,0,1,0
@@ -2119,6 +2142,7 @@ http://www.wikidata.org/entity/Q3180887,John Alexander Mathieson,male,1863,1947,
 http://www.wikidata.org/entity/Q3180894,John Alexander Sullivan,male,1879,1952,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3180972,John Babington Macaulay Baxter,male,1868,1946,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3181091,John Bolton,male,1824,1872,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3181113,John Boyd,male,1826,1893,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3181137,John Bryson,male,1849,1896,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3181141,John Buchanan,male,1931,2019,0,0,1,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3181179,John Campbell,male,1936,NA,1,0,0,0,0,0,0,0,0,1,0
@@ -2136,11 +2160,14 @@ http://www.wikidata.org/entity/Q3181595,John Glasier,male,1809,1894,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q3181599,John Godfrey,male,1942,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3181686,John Hamm,male,1938,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3181719,John Hearn,male,1827,1894,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3181739,John Henry Pope,male,1819,1889,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3181791,Hugh Proudfoot,male,1912,1980,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3181822,John James Fraser,male,1829,1896,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3181839,John Joseph Curran,male,1842,1909,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3181914,John Le Boutillier,male,1797,1872,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3182010,John Matheson,male,1917,2013,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3182026,John McAdam,male,1807,1893,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3182032,John McAlister,male,1842,1918,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3182037,John McCallum,male,1950,NA,1,0,0,0,0,0,1,0,0,1,0
 http://www.wikidata.org/entity/Q3182057,John McIntosh,male,1841,1904,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3182063,John McKay,male,1948,NA,1,0,0,0,0,0,0,0,0,1,0
@@ -2167,6 +2194,7 @@ http://www.wikidata.org/entity/Q3184135,Joseph-Achille Verville,male,1887,1937,1
 http://www.wikidata.org/entity/Q3184139,Joseph-Adolphe Richard,male,1887,1964,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184143,Joseph-Adéodat Blanchette,male,1893,1968,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3184146,Joseph-Aimé Massue,male,1860,1891,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3184148,Joseph-Aldric Ouimet,male,1848,1916,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3184154,Joseph Mercier,male,1874,1935,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184159,Joseph-Alfred Dion,male,1897,1957,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184163,Joseph-Alfred Mongrain,male,1908,1970,1,0,0,0,0,0,0,0,0,1,1
@@ -2184,6 +2212,7 @@ http://www.wikidata.org/entity/Q3184245,Fernand Fafard,male,1882,1955,1,0,0,0,0,
 http://www.wikidata.org/entity/Q3184263,François-Joseph Laflèche,male,1879,1945,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184273,Joseph-Félix Descôteaux,male,1863,1931,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3184276,Joseph Gaspard Boucher,male,1897,1955,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3184285,Joseph-Goderic Blanchet,male,1829,1890,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3184290,Joseph-Guillaume Bossé,male,1843,1908,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184293,Joseph Gédéon Horace Bergeron,male,1854,1917,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3184294,Joseph Hector Leduc,male,1864,1901,1,0,0,0,0,0,0,0,0,1,0
@@ -2338,6 +2367,7 @@ http://www.wikidata.org/entity/Q3260933,Louis-Édouard Roberge,male,1896,1982,1,
 http://www.wikidata.org/entity/Q3260944,Louis-Éphrem Olivier,male,1848,1882,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3260954,Louis-Étienne Parent,male,1875,1960,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3260972,Louis Adolphe Billy,male,1834,1907,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3261089,Louis Archambeault,male,1814,1890,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3261201,Louis Beaubien,male,1837,1915,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3261584,Louis Conrad Pelletier,male,1852,1929,0,0,1,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3261635,Louis Côté,male,1890,1943,0,0,1,0,0,0,0,0,1,0,0
@@ -2472,6 +2502,7 @@ http://www.wikidata.org/entity/Q3307988,Mike Allen,male,1960,NA,0,0,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q3308097,Michael Cayley,male,1842,1878,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3308109,Michael Chong,male,1971,NA,0,0,1,0,0,0,1,0,0,1,0
 http://www.wikidata.org/entity/Q3308201,Michael Joseph Francis Quinn,male,1851,1903,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3308439,Michael Patrick Ryan,male,1825,1893,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3308499,Michael Savage,male,1960,NA,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3308556,Michael Thomas Stenson,male,1838,1912,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q3308582,Michael Wilson,male,1937,2019,0,0,1,0,0,0,0,0,0,1,0
@@ -2564,6 +2595,7 @@ http://www.wikidata.org/entity/Q3361816,Pamphile Réal Du Tremblay,male,1879,195
 http://www.wikidata.org/entity/Q336444,Conrad Black,male,1944,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q3365597,Parm Gill,male,1974,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3367236,Pascal-Pierre Paillé,male,1978,NA,0,0,0,0,1,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q3367566,Pascal Poirier,male,1852,1933,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3368525,Pat Carney,female,1935,NA,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q3368533,Patricia Davidson,female,1946,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3368534,Pat Duncan,female,1960,NA,1,0,0,0,0,0,0,0,1,0,0
@@ -2730,6 +2762,7 @@ http://www.wikidata.org/entity/Q3435932,Robert Mitchell,male,1953,NA,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q3435939,Robert Moffat,male,1844,1887,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3435983,Robert N. Thompson,male,1914,1997,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3435998,Robert Nelson Walsh,male,1864,1938,0,0,1,0,0,0,0,0,0,1,1
+http://www.wikidata.org/entity/Q3436002,Robert Newton Hall,male,1836,1907,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3436203,Robert Ryan,male,1878,1954,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3436317,Robert Smeaton White,male,1856,1944,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3436396,Robert Thibault,male,1959,NA,1,0,0,0,0,0,0,0,0,1,0
@@ -2864,6 +2897,7 @@ http://www.wikidata.org/entity/Q3525122,Thomas Fortin,male,1853,1933,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q3525153,Thomas George Roddick,male,1846,1923,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3525246,Thomas-Jean Bourque,male,1864,1952,0,0,1,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3525337,Thomas Lefebvre,male,1927,1992,1,0,0,0,0,0,0,0,1,1,0
+http://www.wikidata.org/entity/Q3525404,Thomas McGreevy,male,1825,1897,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3525436,Thomas Murray,male,1836,1915,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q3525610,Thomas Temple,male,1818,1899,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q3525631,Thomas Vien,male,1881,1972,1,0,0,0,0,0,0,0,1,1,0
@@ -3032,6 +3066,7 @@ http://www.wikidata.org/entity/Q3856156,Michael Dwyer,male,1879,1953,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q386669,Daniel Aloysius Riley,male,1916,1984,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q386676,Paul Massicotte,male,1951,NA,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q387764,William Howard Hearst,male,1864,1941,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q389321,James Alexander Lougheed,male,1854,1925,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q3915274,Rick Bartolucci,male,1943,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q399006,David Tsubouchi,male,1951,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q399629,Bev Oda,female,1944,NA,0,0,1,0,0,0,1,0,0,1,0
@@ -3202,6 +3237,7 @@ http://www.wikidata.org/entity/Q4718728,Alexander Dew Chaplin,male,1872,1938,0,0
 http://www.wikidata.org/entity/Q4718776,Alexander Duncan McRae,male,1874,1946,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q4718785,Alexander E. Fraser,male,1843,1905,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4718792,Alexander Edwards,male,1876,1938,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q4718817,Alexander F. Cameron,male,1860,1943,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4718833,Alexander Ferguson MacLaren,male,1854,1917,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4718885,Alexander Franklin Campbell,male,1845,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4718886,Alexander Francis Macdonald,male,1818,1913,1,0,0,0,0,0,0,0,0,1,0
@@ -3300,7 +3336,7 @@ http://www.wikidata.org/entity/Q4741849,Ambrose Peddle,male,1927,2014,0,0,1,0,0,
 http://www.wikidata.org/entity/Q4747941,Amos Purdy,male,1825,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4748658,Amrit Mangat,female,1953,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4749604,Amédée Melanson,male,1882,1930,1,0,0,0,0,0,0,0,0,0,0
-http://www.wikidata.org/entity/Q4756245,Andrew B. Ingram,male,1851,1934,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q4756245,Andrew B. Ingram,male,1851,1934,1,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4756276,Andrew Bannatyne,male,1829,1889,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4756323,Andrew Beniuk,male,1944,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4756416,Andrew Brewin,male,1907,1983,0,1,0,0,0,0,0,0,0,1,0
@@ -3437,6 +3473,7 @@ http://www.wikidata.org/entity/Q4800320,Arthur Soetaert,male,1913,2006,1,0,0,0,0
 http://www.wikidata.org/entity/Q4800440,Arthur Thibault,male,1914,1983,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4800493,Arthur Trefusis Heneage Williams,male,1837,1885,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4800559,Arthur W. MacKenzie,male,1898,1986,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q4800644,Arthur Wellington Ross,male,1846,1901,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4800655,Arthur White,male,1907,1973,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q4800718,Arthur Wishart,male,1903,1986,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q4800793,Arthur de Witt Foster,male,1886,1939,0,0,1,0,0,0,0,0,0,1,0
@@ -3693,6 +3730,7 @@ http://www.wikidata.org/entity/Q5077272,Charles Edward Hanna,male,1884,1932,1,0,
 http://www.wikidata.org/entity/Q5077298,Charles Edward Rea,male,1902,1965,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077311,Charles Edward Tisdall,male,1866,1936,0,0,1,0,0,0,0,0,0,0,1
 http://www.wikidata.org/entity/Q5077325,Charles Edwin Kaulbach,male,1834,1907,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5077367,Charles Elliott Tanner,male,1857,1946,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5077383,Charles Elwood Stephenson,male,1898,1965,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077403,Charles Erastus Hickey,male,1840,1908,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077444,Charles Eusèbe Casgrain,male,1825,1907,0,0,1,0,0,0,0,0,1,0,0
@@ -3700,6 +3738,7 @@ http://www.wikidata.org/entity/Q5077451,Charles Evans,male,1882,1947,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q5077508,Charles F. Cooper,male,1852,1919,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5077581,Charles Fairbairn,male,1837,1911,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077803,Charles Franklin Farwell,male,1860,1921,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5077842,Charles Frederick Ferguson,male,1833,1909,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077850,Charles Frederick Houghton,male,1839,1898,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5077932,Charles G. Hawkins,male,1887,1958,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5077999,Charles George Fletcher,male,1890,1959,1,0,0,0,0,0,0,0,0,0,0
@@ -3712,6 +3751,7 @@ http://www.wikidata.org/entity/Q5078903,Charles Henry,male,1911,1989,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q5078925,Charles Henry Davison,male,1840,1896,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5078959,Charles Henry Mills,male,1861,2000,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5078993,Charles Herbert Brereton,male,1845,1908,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5078999,Charles Herbert Mackintosh,male,1843,1931,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q5079028,Charles Hibbert Tupper,male,1855,1927,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q507927,Gordon Sidney Harrington,male,1883,1943,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5079429,Charles James Campbell,male,1819,1906,0,0,1,0,0,0,0,0,0,1,0
@@ -3809,6 +3849,7 @@ http://www.wikidata.org/entity/Q5126537,Clarence George Willis,male,1907,1984,0,
 http://www.wikidata.org/entity/Q5126609,Clarence Jameson,male,1872,1928,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5126670,Clarence Milligan,male,1904,1993,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5126684,Clarence Owen Cooper,male,1899,1966,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5126708,Clarence Primrose,male,1830,1902,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5126763,Clarence Stork,male,1896,1970,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5127337,Clark Murray,male,1900,1983,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5127508,Clarke Tivy Rollins,male,1912,1996,0,0,1,0,0,0,0,0,0,0,0
@@ -3911,6 +3952,7 @@ http://www.wikidata.org/entity/Q5214525,Dan Vandal,male,1960,NA,1,0,0,0,0,0,1,0,
 http://www.wikidata.org/entity/Q5214561,Dan Waters,male,NA,NA,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5214809,Dana Porter,male,1901,1967,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5216384,Daniel Alexander Cameron,male,1870,1937,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5216575,Daniel Black Chisholm,male,1842,1899,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5216698,Daniel Burt,male,1847,1924,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5216796,Daniel Charles Moore,male,1801,1890,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5216925,Daniel Davies,male,1825,1911,0,0,1,0,0,0,0,0,0,1,0
@@ -3949,6 +3991,7 @@ http://www.wikidata.org/entity/Q5229616,Dave Quest,male,1964,NA,0,0,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q5229710,Dave Rodney,male,1964,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5230125,Dave Wilson,male,1970,NA,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5230154,Dave Worthy,male,1934,2004,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5230480,David A. Hearn,male,1853,1920,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5230699,David Alexander Gordon,male,1858,1919,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5230766,David Anderson,male,1937,NA,1,0,0,0,0,0,1,0,0,1,0
 http://www.wikidata.org/entity/Q5230875,David Arthur Lafortune,male,1848,1922,1,0,0,0,0,0,0,0,0,1,0
@@ -4020,6 +4063,7 @@ http://www.wikidata.org/entity/Q5240894,David Weatherhead,male,1928,2012,1,0,0,0
 http://www.wikidata.org/entity/Q5240957,David Wells,male,1962,NA,0,0,1,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5240977,David Wesley Bole,male,1856,1933,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5241099,David Wilks,male,1959,NA,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5241115,David William Gordon,male,1832,1893,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5241121,David William Smith,male,1938,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5241126,David William Warner,male,1941,NA,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5241195,David Wilson,male,1955,NA,1,0,0,0,0,0,0,0,0,0,0
@@ -4128,6 +4172,7 @@ http://www.wikidata.org/entity/Q5294511,Donald Hogarth,male,1879,1950,0,0,1,0,0,
 http://www.wikidata.org/entity/Q5294597,Donald James Cowan,male,1883,1964,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5294644,Donald Kinney,male,1957,2021,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5294707,Donald Leonard Faris,male,1936,NA,0,1,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5294746,Donald MacInnes,male,1824,1900,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5294747,Donald MacInnis,male,1918,2007,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5294749,Donald MacKeen Smith,male,1923,1998,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5294755,Donald MacLennan,male,1875,1953,1,0,0,0,0,0,0,0,1,1,0
@@ -4244,6 +4289,7 @@ http://www.wikidata.org/entity/Q5326421,Earle Drope,male,1898,1969,0,0,1,0,0,0,0
 http://www.wikidata.org/entity/Q5326469,Earle Rafuse,male,1930,1998,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5331739,Ebenezer Tilton Moseley,male,1844,1898,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5331741,Ebenezer Vining Bodwell,male,1827,1889,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5332081,William Mackenzie McLeod,male,1854,1932,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5332202,Eccles James Gott,male,1884,1939,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5334617,Ed Byrne,male,1963,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5334759,Ed Doyle,male,1935,NA,0,0,1,0,0,0,0,0,0,0,0
@@ -4304,6 +4350,7 @@ http://www.wikidata.org/entity/Q5344367,Edward Matthew Farrell,male,1854,1931,1,
 http://www.wikidata.org/entity/Q5344453,Edward Michener,male,1869,1947,0,0,1,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5344475,Edward Ming,male,1855,1936,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5344530,Edward Mortimer Macdonald,male,1865,1940,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5344552,Edward Murphy,male,1818,1895,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5344589,Edward Nasserden,male,1919,1995,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5344636,Edward Norman Lewis,male,1858,1931,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5344914,Edward Prudden,male,1859,1932,1,0,0,0,0,0,0,0,0,0,0
@@ -4314,6 +4361,7 @@ http://www.wikidata.org/entity/Q5345902,Edward William James Owens,male,1860,192
 http://www.wikidata.org/entity/Q5346305,Edwin Clarendon Carpenter,male,1845,1920,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5346329,Edwin Cyrus Graves,male,1868,1936,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5346605,Edwin Leather,male,1919,2005,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5346768,Edwin Randolph Oakes,male,1818,1889,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5346864,Edwin Tchorzewski,male,1943,2008,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5346873,Edwin Tolton,male,1856,1917,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5346917,Edwin William Brunsden,male,1896,1976,0,0,1,0,0,0,0,0,0,1,0
@@ -4559,6 +4607,7 @@ http://www.wikidata.org/entity/Q55081040,Amy Fee,female,1982,NA,0,0,1,0,0,0,0,0,
 http://www.wikidata.org/entity/Q55081063,Peter Bethlenfalvy,male,NA,NA,0,0,1,0,0,0,1,0,0,0,0
 http://www.wikidata.org/entity/Q5511577,Félix Carbray,male,1835,1907,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5511639,Félix Routhier,male,1827,1903,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5515622,Gabriel Flewelling,male,1842,1922,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5516666,Gaetan Serré,male,1938,2017,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5521814,Gar Knutson,male,1956,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5522599,Gardner Green Stevens,male,1814,1892,1,0,0,0,0,0,0,0,1,0,0
@@ -4659,6 +4708,7 @@ http://www.wikidata.org/entity/Q5540441,George Henry Doucett,male,1897,1974,0,0,
 http://www.wikidata.org/entity/Q5540476,George Henry Ross,male,1878,1956,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q5540482,George Henry Stokes,male,1876,1959,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5540577,George Heyman,male,NA,NA,0,1,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5540611,George Hilliard,male,1827,1892,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5540612,George Hillmer,male,1866,1935,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5540636,George Ho Lem,male,1918,2005,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5540638,George Hoadley,male,1867,1955,0,0,1,0,0,0,0,0,0,0,0
@@ -4666,6 +4716,7 @@ http://www.wikidata.org/entity/Q5540691,George Holmes Challies,male,1884,1976,0,
 http://www.wikidata.org/entity/Q5540719,George Hope Bertram,male,1847,1900,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5540728,George Horace Gooderham,male,1868,1942,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5540829,George Hugh Macdonell,male,1851,1920,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q5541035,George Jackson,male,1808,1885,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5541145,George Johnston Musgrove,male,1865,1954,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q5541290,George Kempt,male,1821,1885,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5541319,George Kerr,male,1849,1913,0,0,1,0,0,0,0,0,0,0,0
@@ -4725,6 +4776,7 @@ http://www.wikidata.org/entity/Q5545096,George Taylor,male,1840,1919,0,0,1,0,0,0
 http://www.wikidata.org/entity/Q5545105,George Taylor Fulford,male,1852,1905,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5545108,George Taylor MacNutt,male,1865,1937,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5545273,George Topolnisky,male,1916,2012,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q5545371,George Turner Orton,male,1837,1901,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5545374,George Tustin,male,1889,1968,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q5545448,George Van Roggen,male,1921,1992,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q5545455,George VanderBurg,male,1957,NA,0,0,1,0,0,0,0,0,0,0,0
@@ -5275,8 +5327,11 @@ http://www.wikidata.org/entity/Q6140894,James Palmer Rankin,male,1855,1934,1,0,0
 http://www.wikidata.org/entity/Q6141123,James Pearson Wells,male,1822,1893,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6141802,James Ralston,male,NA,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6141882,James Rayside,male,1836,1895,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q6141884,James Rea Benson,male,1807,1885,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q6141902,James Redford,male,1821,1908,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q6141944,James Reid,male,1839,1904,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q6141946,James Reid,male,1848,1926,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q6142204,James Robert Gowan,male,1815,1909,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q6142229,James Robert Stratton,male,1857,1916,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6142234,James Robert Wilson,male,1866,1941,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6142401,James Rooney,male,1897,1969,1,0,0,0,0,0,0,0,0,1,0
@@ -5432,6 +5487,7 @@ http://www.wikidata.org/entity/Q6218591,John Alexander Macdonald,male,1883,1945,
 http://www.wikidata.org/entity/Q6218593,John Alexander Macdonald,male,1874,1948,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q6218597,John Alexander Macdonald Armstrong,male,1877,1926,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6218604,John Alexander McDonald,male,1889,1962,1,0,0,0,0,0,0,0,1,0,0
+http://www.wikidata.org/entity/Q6218611,John Alexander McGillivray,male,1853,1911,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6218614,John Alexander Merkley,male,1877,1946,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6218646,John Alexander Wallace,male,1881,1961,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6218684,John Alfred McAndrew,male,1859,1923,1,0,0,0,0,0,0,0,0,0,0
@@ -5577,6 +5633,7 @@ http://www.wikidata.org/entity/Q6241520,John James Carrick,male,1873,1966,0,0,1,
 http://www.wikidata.org/entity/Q6241555,John James Kinley,male,1881,1971,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q6241593,John James Smith,male,1912,1987,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6242106,John Joseph Bench,male,1905,1947,1,0,0,0,0,0,0,0,1,0,0
+http://www.wikidata.org/entity/Q6242162,John Joseph Hawkins,male,1840,1916,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6242192,John Joseph Marshall,male,1807,1870,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6242316,John Judah Glass,male,1897,1973,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6242398,John K. Ryerson,male,1820,1890,1,0,0,0,0,0,0,0,0,0,0
@@ -5835,6 +5892,7 @@ http://www.wikidata.org/entity/Q6287997,Joseph Willie Comeau,male,1876,1966,1,0,
 http://www.wikidata.org/entity/Q6288001,Joseph Willis Margeson,male,1880,1925,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6289909,Joshua Homer,male,1827,1886,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6290088,Joshua Newton Freeman,male,1816,1912,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q6290229,Joshua Spencer Thompson,male,1828,1880,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6290518,Josiah Hooper,male,1807,1878,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6290526,Josiah Johnston Preston,male,1855,1937,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6290615,Josiah Sandford Brigham,male,1818,1882,0,0,1,0,0,0,0,0,0,0,0
@@ -6002,6 +6060,7 @@ http://www.wikidata.org/entity/Q6525531,Leonard Mackenzie Reilly,male,1912,2010,
 http://www.wikidata.org/entity/Q6525558,Leonard Melvin Larson,male,1912,1977,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6525645,Leonard Preyra,male,1955,NA,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6525755,Leonard Stick,male,1892,1979,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q6525786,Leonard Thomas Bland,male,1851,1906,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6526538,Leonidas Giroux,male,1885,1936,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6527017,Leopold Macaulay,male,1887,1979,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6529229,Les Benjamin,male,1925,2003,0,1,0,0,0,0,0,0,0,1,0
@@ -6041,6 +6100,7 @@ http://www.wikidata.org/entity/Q6591377,Philippe Gigantès,male,1923,2004,1,0,0,
 http://www.wikidata.org/entity/Q660646,Pierre-Joseph-Olivier Chauveau,male,1820,1890,0,0,1,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q660983,Joseph-Éloi Fontaine,male,1865,1930,1,0,0,0,0,0,0,0,0,1,1
 http://www.wikidata.org/entity/Q663134,Jean-Marc Robitaille,male,1955,NA,0,0,1,0,0,0,0,0,0,1,1
+http://www.wikidata.org/entity/Q663451,Thomas Nicholson Gibbs,male,1821,1883,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q66567132,Sue Montgomery,female,1958,NA,0,1,0,0,0,0,0,0,0,0,1
 http://www.wikidata.org/entity/Q6660291,Liz Sandals,female,1947,NA,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q6662374,Lloyd Crouse,male,1918,2007,0,0,1,0,0,0,0,0,0,0,0
@@ -6129,6 +6189,7 @@ http://www.wikidata.org/entity/Q6722293,Mac Harb,male,1953,NA,1,0,0,0,0,0,0,0,1,
 http://www.wikidata.org/entity/Q6722325,Mac McCutcheon,male,1912,1978,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6734223,Mahlon K. Cowan,male,1863,1917,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6737179,Maitland Stewart McCarthy,male,1872,1930,0,0,1,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q6740851,Malachy Bowes Daly,male,1836,1920,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6742232,Malcolm Cameron,male,1808,1867,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6742436,Malcolm Lang,male,1875,1941,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q6742459,Malcolm MacInnis,male,1933,NA,0,1,0,0,0,0,0,0,0,1,0
@@ -6377,6 +6438,7 @@ http://www.wikidata.org/entity/Q6990679,Nelson Parliament,male,1877,1967,1,0,0,0
 http://www.wikidata.org/entity/Q6990708,Nelson Rattenbury,male,1907,1973,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q6990744,Nelson Spencer,male,1876,1943,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7020353,Newton Rowell,male,1867,1941,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q7025406,Nicholas Flood Davin,male,1840,1901,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7026215,Nicholas Simons,male,NA,NA,0,1,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7026295,Nicholas Taylor,male,1927,2020,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q7026364,Nicholas W. Brown,male,1821,1889,0,0,1,0,0,0,0,0,0,0,0
@@ -6773,6 +6835,7 @@ http://www.wikidata.org/entity/Q7343232,Robert Cruise,male,1868,1932,1,0,0,0,0,0
 http://www.wikidata.org/entity/Q7343253,Robert Cunningham,male,1836,1874,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7343403,Robert Daudlin,male,1940,NA,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7343461,Robert Deachman,male,1878,1955,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q7343612,Robert Doull,male,1828,1906,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7343942,Robert Eaton,male,1871,1964,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7343990,Robert Edwin Clapp,male,1855,NA,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7343997,Robert Edwy Ryerson,male,1865,1958,0,0,1,0,0,0,0,0,0,1,0
@@ -6983,6 +7046,7 @@ http://www.wikidata.org/entity/Q7411850,Samuel John Fox,male,1854,1911,0,0,1,0,0
 http://www.wikidata.org/entity/Q7411855,Samuel Johnathan Lane,male,1830,1891,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7412148,Samuel McDonnell,male,1834,1910,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7412171,Samuel Merner,male,1823,1908,0,0,1,0,0,0,0,0,1,1,0
+http://www.wikidata.org/entity/Q7412425,Samuel Prowse,male,1835,1902,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q7412502,Samuel Rollin Hesson,male,1829,1915,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7412508,Samuel Rosborough Balcom,male,1888,1981,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7412614,Samuel Shobal Ryckman,male,1849,1929,0,0,1,0,0,0,0,0,0,1,0
@@ -7171,10 +7235,12 @@ http://www.wikidata.org/entity/Q7786799,Thomas-Alfred Bernier,male,1844,1908,0,0
 http://www.wikidata.org/entity/Q7787002,Thomas Alfred Wardle,male,1913,2005,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7787003,Thomas Alfred Thompson,male,1868,1953,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7787069,Thomas Andrew Low,male,1871,1931,1,0,0,0,0,0,0,0,0,1,0
+http://www.wikidata.org/entity/Q7787126,Thomas Arkell,male,1823,1906,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7787184,Thomas Aston Blakelock,male,1883,1974,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7787192,Thomas Atkins Wardell,male,1865,1902,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7787247,Thomas B. Guest,male,1816,1884,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7787348,Thomas Ballantyne,male,1829,1908,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q7787393,Thomas Barlow Smith,male,1839,1933,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7787397,Thomas Barnard Flint,male,1847,1919,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7787502,Thomas Beattie,male,1844,1914,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7787694,Thomas Blezard,male,1838,1902,1,0,0,0,0,0,0,0,0,0,0
@@ -7241,6 +7307,7 @@ http://www.wikidata.org/entity/Q7792254,"Thomas Mayne Daly, Sr.",male,1827,1885,
 http://www.wikidata.org/entity/Q7792269,Thomas McCarthy,male,1832,1870,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7792286,Thomas McCulloch Fairbairn,male,1840,1874,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7792297,Thomas McGarry,male,1871,1935,0,0,1,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q7792319,Thomas McKay,male,1839,1912,1,0,0,0,0,0,0,0,1,1,0
 http://www.wikidata.org/entity/Q7792345,Thomas McMillan,male,1864,1932,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q7792356,Thomas McQuesten,male,1882,1948,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q7792403,Thomas Merritt Cayley,male,1878,1933,1,0,0,0,0,0,0,0,0,1,0
@@ -7474,6 +7541,7 @@ http://www.wikidata.org/entity/Q8006484,William Cameron Edwards,male,1844,1921,1
 http://www.wikidata.org/entity/Q8006490,William Campbell,male,1929,NA,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q8006526,William Cantwell,male,1804,1886,0,0,1,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q8006564,William Carlton Woods,male,1891,1965,1,0,0,0,0,0,0,0,0,0,0
+http://www.wikidata.org/entity/Q8006598,William Carruthers Little,male,1820,1881,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q8006783,William Chisholm,male,1870,1936,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q8006920,William Cluxton,male,1819,1901,0,0,1,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q8006921,William Clyde Caldwell,male,1843,1905,1,0,0,0,0,0,0,0,0,0,0
@@ -7619,6 +7687,7 @@ http://www.wikidata.org/entity/Q8015415,William McGill,male,1814,1883,1,0,0,0,0,
 http://www.wikidata.org/entity/Q8015428,William McGregor,male,1836,1903,1,0,0,0,0,0,0,0,0,1,0
 http://www.wikidata.org/entity/Q8015495,William McMaster,male,1811,1887,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q8015610,William Michael Wall,male,1911,1962,1,0,0,0,0,0,0,0,1,0,0
+http://www.wikidata.org/entity/Q8015640,William Miller,male,1835,1912,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q8015689,William Mitchell,male,1851,1926,1,0,0,0,0,0,0,0,1,0,0
 http://www.wikidata.org/entity/Q8015705,William Moffat,male,1847,1926,1,0,0,0,0,0,0,0,0,0,0
 http://www.wikidata.org/entity/Q8015780,William Moore Benidickson,male,1911,1985,1,0,0,0,0,0,0,0,1,1,0
