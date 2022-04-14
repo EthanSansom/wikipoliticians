@@ -176,6 +176,22 @@ wiki_data_clean <-
   # Remove duplicate observations of multiple-birth/death year politicians
   distinct()
 
+# If politician belongs to > 1 party, recode to only include their most recent party
+# 81 Cases of multiple party affiliation
+multi_parties <-
+  wiki_data_clean |>
+  mutate(multi = green + liberal + cp + bq + ndp) |>
+  filter(multi > 1)
+
+party_map <-
+  c(
+    "http://www.wikidata.org/entity/Q128655" = "cp",        # Robert Borden
+    "http://www.wikidata.org/entity/Q128677" = "cp",        # Mackenzie Bowell
+    "http://www.wikidata.org/entity/Q128702" = "cp",        # John A. Macdonald
+    "http://www.wikidata.org/entity/Q14915601" = "cp"       # James Alexander Calder
+  )
+
+
 # Save Cleaned Data ------------------------------------------------------------
 write_csv(x = wiki_data_clean, file = here("inputs/data/wiki_data_clean.csv"))
 
