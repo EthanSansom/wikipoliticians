@@ -21,6 +21,31 @@ library(kableExtra)   # For formatting tables
 library(gridExtra)    # For arranging plots
 library(bookdown)     # For cross referencing and citing
 library(ggrepel)      # For adding point labels to plots
+library(modelsummary) # For creating summary tables
+library(performance)  # For evaluating model performance
+library(see)          # For graphing model performance
+
+# Load Data --------------------------------------------------------------------
+wiki_data <- read_csv(here("inputs/data/wiki_data_pages.csv"))
+
+# Get the total page views for each politician
+wiki_data <-
+  wiki_data |>
+  rowwise() |>
+  mutate(page_views = sum(across(starts_with("views"), na.rm = TRUE)))
+
+# Create Party Factor and Position Factor Variable
+wiki_data <-
+  wiki_data |>
+  mutate(
+    party = case_when(
+      cp == 1 ~ "CPC",
+      liberal == 1 ~ "Liberal",
+      green == 1 ~ "Green",
+      ndp == 1 ~ "NDP",
+      bq == 1 ~ "BQ"
+    )
+  )
 ```
 
 \newpage
@@ -33,6 +58,407 @@ To explore the potential of assessing voter behaviors and perceptions using Wiki
 In the following sections of this paper, a brief description of the data collection and cleaning process is provided, followed by an investigation of the data itself. The Model \@ref(model) section describes the multiple linear regression framework used in this analysis, including a discussion of the model's assumptions and subsequent limitations. In the Results \@ref(results) section, the implications of the model estimates and the results of the data investigation are described. Finally, in the Discussion \@ref(discussion) section, the results are analysed in the context of the 2021 federal election results and the political views of the Canadian electorate more broadly. The paper concludes with a discussion if its limitations, including the challenges to the external validity of the model and the ability of Wikipedia page viewership to serve as a valid proxy for voter interest. For this analysis, the R statistical software [@citeR] is used to import and clean Wikipedia page data, perform regression model estimation and data visualization, and compile the paper itself. Packages `tidyverse` [@citetidyverse] and `dplyr` [@citedplyr] are used to manipulate data, `ggplot2` [@citeggplot2], `gridExtra` [@citegridExtra], and `kableExtra` [@citekableExtra], are used for creating tables and plots, and `ggrepel` [@citeggrepel] is used to customize plot labels. To access web APIs, the package `httr` [@citehttr] is used, and for scraping HTML data the package `rvest` [@citervest] is used. The package `here` [@citehere] is used for to simplify reading and writing data within the file directory. Lastly, packages `bookdown` [@citebookdown], `knitr` [@citeknitr], and `tinytex` [@citetinytex] are utilized to format and compile the final paper.
 
 # Data
+
+```{r outliers, echo = FALSE, message = FALSE, warning = FALSE}
+# Get the positions of jittered points
+pos <- position_jitter(width = 0.1, seed = 1)
+
+# Assign Colors to Each Party
+party_colour = 
+  c(
+    "BQ" = "#003F91",
+    "Green" = "#6DA34D",
+    "CPC" = "#1B9AAA",
+    "NDP" = "#F26419",
+    "Liberal" = "#C1292E"
+  )
+
+# Plot Outliers
+wiki_data |>
+  ggplot( aes(x = party, y = page_views, label = if_else(page_views > 500000, name, "")), position = pos) +
+  
+    # Plot Points
+    geom_point(aes(colour = party), alpha = 0.7, position = pos) +
+    
+    # Label Points Belonging to Outliers (pages with > 500,000 views)
+    geom_text_repel(
+      position = pos,
+      box.padding = 1,
+      segment.curvature = 0.5,
+      segment.ncp = 5,
+      segment.angle = 90
+    ) +
+    
+    # Plot Labels
+    xlab("Party") +
+    ylab("Page Views") +
+    labs(
+      title = "Page Views by Political Party",
+      subtitle = "Pages with Greater than 500,000 Views are Labelled",
+      colour = "Party"
+      ) +
+    
+    # Set Theme and Color Scheme
+    theme_minimal() +
+    scale_color_manual(values = party_colour) +
+    scale_y_continuous(labels = scales::number, breaks = seq(0, 3000000, 500000))
+```
+
+\newpage
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+# Plot -> filter PM's and Party Leaders
+wiki_data |>
+  filter(prime_minister == 0, party_leader == 0) |>
+  ggplot(aes(x = party, y = page_views, label = if_else(page_views > 500000, name, "")), position = pos) +
+  
+  # Plot Points
+  geom_point(aes(colour = party), alpha = 0.7, position = pos) +
+  
+  # Label Points Belonging to Prime Ministers
+  geom_text_repel(
+    position = pos,
+    box.padding = 1,
+    segment.curvature = 0.5,
+    segment.ncp = 5,
+    segment.angle = 90
+  ) +
+  
+  # Plot Labels
+  xlab("Party") +
+  ylab("Page Views") +
+  labs(
+    title = "Page Views by Political Party",
+    subtitle = "Prime Ministers and Party Leaders are Ommitted",
+    colour = "Party"
+    ) +
+  
+  # Set Theme and Color Scheme
+  theme_minimal() +
+  scale_color_manual(values = party_colour) +
+  scale_y_continuous(labels = scales::number)
+```
+
+\newpage
+
+```{r tsleaders, echo = FALSE, message = FALSE, warning = FALSE}
+electoral_candidates <- c("Justin Trudeau",	"Erin O'Toole", "Jagmeet Singh", "Annamie Paul", "Yves-François Blanchet")
+
+election_ts <-
+  wiki_data |>
+  filter(name %in% electoral_candidates)
+
+election_ts <-
+  election_ts |>
+  select(party, name, starts_with("views")) |>
+  
+  # Pivot to plot time series data by party
+  pivot_longer(
+    cols = starts_with("views"),
+    names_to = "month",
+    names_prefix = "views_m",
+    values_to = "views"
+  ) |>
+  
+  # Create numeric month variable
+  mutate(month = as.numeric(month))
+
+# Assign Colors to Each Party Leader
+leader_colour = 
+  c(
+    "Yves-François Blanchet" = "#003F91",
+    "Annamie Paul" = "#6DA34D",
+    "Erin O'Toole" = "#1B9AAA",
+    "Jagmeet Singh" = "#F26419",
+    "Justin Trudeau" = "#C1292E"
+  )
+
+election_ts |>
+  ggplot(aes(x=month, y=views, label = name, colour = name)) +
+  geom_line() +
+  theme_minimal() +
+  theme(legend.position = "top", legend.text = element_text(size = 7)) +
+  
+  geom_text_repel(
+    data = election_ts |> filter(name == "Justin Trudeau", month == 9),
+    aes(label = "Federal Election on September 20th"),
+    colour = "black",
+    nudge_x = -2.5,
+    nudge_y = -50000,
+    segment.curvature = 0.5,
+    segment.ncp = 5,
+    segment.angle = 90,
+    size = 3,
+    show.legend = FALSE
+  ) +
+  
+  # Set Labels
+  labs(
+    x = "Month",
+    y = "Pageviews",
+    title = "Federal Election Candidates 2021 Monthly Pageviews",
+    colour = ""
+  ) +
+  
+  # Set Scales
+  scale_colour_manual(values = leader_colour) +
+  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
+  scale_y_continuous(labels = scales::number)
+```
+
+\newpage
+
+```{r tsparties, echo = FALSE, message = FALSE, warning = FALSE}
+parties_ts <-
+  wiki_data |>
+  group_by(party) |>
+  summarize(across(starts_with("views"), ~sum(.x, na.rm = TRUE))) |>
+  
+  # Pivot to plot time series data by party
+  pivot_longer(
+    cols = starts_with("views"),
+    names_to = "month",
+    names_prefix = "views_m",
+    values_to = "views"
+  ) |>
+  
+  # Create numeric month variable
+  mutate(month = as.numeric(month))
+
+parties_ts |>
+  ggplot(aes(x=month, y=views, colour = party)) +
+  geom_line() +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  
+  # Set Labels
+  labs(
+    x = "Month",
+    y = "Pageviews",
+    title = "Federal Parties 2021 Monthly Pageviews",
+    colour = ""
+  ) +
+  
+  # Set Scales
+  scale_colour_manual(values = party_colour) +
+  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
+  scale_y_continuous(labels = scales::number)
+```
+
+\newpage
+
+```{r proportions, echo = FALSE, message = FALSE, warning = FALSE}
+# Create Election results table
+# Seats from https://www.ourcommons.ca/members/en/party-standings (NOTE: 1 Seat to Independent)
+# Vote Share From: https://www.bloomberg.com/graphics/2021-canada-election-live-results/
+election_results <-
+  tibble(
+    seats = c("Liberal" = 159, "CPC" = 119, "BQ" = 32, "NDP" = 25, "Green" = 2, "Other" = 1),
+    vote_share = c("Liberal" = 0.326, "CPC" = 0.337, "BQ" = 0.076, "NDP" = 0.178, "Green" = 0.023, "Other" = 0.06),
+    party = c("Liberal", "CPC", "BQ", "NDP", "Green", "Other")
+  )
+
+party_proportions <-
+  wiki_data |>
+  
+  # Get page views and number of pages by party
+  group_by(party) |>
+  summarize(
+    page_views = sum(page_views, na.rm = TRUE),
+    pages = n()
+  ) |>
+  
+  # Add actual election results by party
+  add_row(party = "Other", page_views = 0, pages = 0) |>
+  left_join(y = election_results, by = "party") |>
+  
+  # Get percent share for each party
+  mutate(
+    page_views = page_views/sum(page_views),
+    pages = pages/sum(pages),
+    seats = seats/338
+  ) |>
+  
+  # Pivot for easier graphing
+  pivot_longer(!party, names_to = "type", values_to = "percent")
+
+party_proportions |>
+  
+  # Create Plot
+  ggplot(aes(x = percent, y = type, fill = party)) +
+  geom_bar(stat = "identity", position = "stack") +
+  # Text Labels with help from:
+  # https://stackoverflow.com/questions/34903368/how-to-center-stacked-percent-barchart-labels
+  geom_text(
+    aes(
+      label = if_else(percent > 0.05, paste0(round(100*percent),"%"), "") 
+      ), 
+    size = 3,
+    position = position_stack(vjust=0.5),
+    colour = "white"
+    ) +
+  
+  # Set labels
+  labs(
+    title = "Share of Wikipedia Pages, Page Views, and House Seats by Party",
+    subtitle = "Page Views, Page Count, and Election Results from the 2021",
+    fill = "",
+    x = "Percent Share",
+    y = ""
+  ) +
+  
+  # Set Scale to Percentage
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_discrete(
+    labels = c("vote_share" = "Votes", "seats" = "House Seats", "pages" = "Pages", "page_views" = "Page Views")
+    ) +
+  
+  # Set Theme and Color Scheme
+  theme_minimal() +
+  
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  ) +
+  
+  guides(fill = guide_legend(nrow = 1, byrow=TRUE)) +
+  scale_fill_manual(values = c(party_colour, "Other" = "grey"))
+```
+
+\newpage
+
+```{r dataexp, echo = FALSE, message = FALSE, warning = FALSE}
+# Create a set of bar charts with descriptive statistics by party
+# - avg. page views
+# - avg. NON-Position Page Views
+
+# - avg. page views by position -> PM, Leader, Minister, Other
+
+# - gender share per party - different table
+# - page views per gender
+# - Prime Minister Page Views?
+
+position_views <-
+  wiki_data |>
+  group_by(position) |>
+  summarize(page_views = mean(page_views, na.rm = TRUE))
+
+summary_data <-
+  wiki_data |>
+  mutate(gender = if_else(gender == "male", 1, 0)) |>
+  select(page_views, gender, birthyear, prime_minister, party_leader, minister, party)
+```
+
+\newpage
+
+```{r balance, echo = FALSE, message = FALSE, warning = FALSE}
+# Create a by party balance table (NOTE: Probably Add this in the Appendix, Flip Sideways for Length)
+summary_data <-
+  wiki_data |>
+  mutate(gender = if_else(gender == "male", 1, 0)) |>
+  select(page_views, gender, birthyear, prime_minister, party_leader, minister, party) |>
+  rename(
+    "Page Views" = page_views,
+    "Male (%)" = gender,
+    "Birth Year" = birthyear,
+    "Prime Minister (%)" = prime_minister,
+    "Party Leader (%)" = party_leader,
+    "Minister (%)" = minister
+  )
+
+datasummary_balance(formula = ~ party, data = summary_data, dinm = FALSE, fmt = "%.3f") |>
+  kableExtra::landscape() |>
+  kable_styling(font_size = 10)
+```
+
+\newpage
+
+```{r models, echo = FALSE, message = FALSE, warning = FALSE}
+models <- 
+  list(
+    "Party" = lm(page_views ~ liberal + cp + bq + green, data = wiki_data),
+    "Party and Position" = lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister, 
+                    data = wiki_data),
+    "Full" = 
+      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + gender + 
+           birthyear, data = wiki_data |> mutate(birthyear = birthyear - 1950))
+)
+
+coef_map = c(
+  "liberal" = "Liberal",
+  "cp" = "CPC",
+  "bq" = "BQ",
+  "green" = "Green",
+  "prime_minister" = "Prime Minister",
+  "party_leader" = "Party Leader",
+  "minister" = "Minster",
+  "gender" = "Male",
+  "birthyear" = "Birthyear - 1950"
+)
+
+notes = "Estimate standard error appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise. Male is an indicator equal to 1 if the politician is male and 0 otherwise."
+
+modelsummary(
+  models,
+  coef_map = coef_map, 
+  gof_omit = "^(?!R2|Num)",
+  notes = notes,
+  threeparttable = TRUE
+  )
+```
+
+
+```{r modelsrestricted, echo = FALSE, message = FALSE, warning = FALSE}
+models_restricted <- 
+  list(
+    "Party" = lm(page_views ~ liberal + cp + bq + green, 
+                 data = wiki_data |> 
+                   filter(!(name %in% electoral_candidates))
+                 ),
+    "Party and Position" = lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister, 
+                    data = wiki_data |> 
+                      filter(!(name %in% electoral_candidates))
+                    ),
+    "Full" = 
+      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + gender + 
+           birthyear, 
+         data = wiki_data |> 
+           mutate(birthyear = birthyear - 1950) |> 
+           filter(!(name %in% electoral_candidates))
+         )
+    )
+
+coef_map = c(
+  "liberal" = "Liberal",
+  "cp" = "CPC",
+  "bq" = "BQ",
+  "green" = "Green",
+  "prime_minister" = "Prime Minister",
+  "party_leader" = "Party Leader",
+  "minister" = "Minster",
+  "gender" = "Male",
+  "birthyear" = "Birthyear - 1950"
+)
+
+notes = "Estimate standard error appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise. Male is an indicator equal to 1 if the politician is male and 0 otherwise."
+
+modelsummary(
+  models_restricted,
+  coef_map = coef_map, 
+  gof_omit = "^(?!R2|Num)",
+  notes = notes,
+  threeparttable = TRUE
+  )
+```
+
+\newpage
+
+```{r performance, echo = FALSE, message = FALSE, warning = FALSE}
+# Evaluate the Performance of the full model
+performance::check_model(models$Full)
+```
+
 
 # Model
 
