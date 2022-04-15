@@ -43,7 +43,7 @@ get_page_views <- function(page_name, page_lang) {
   prefix <- 'https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/'
   lang <- paste0(page_lang, '.wikipedia.org/')
   suffix <- '/monthly/20210101/20220101'
-  response_url <- paste0(prefix, lang, "all-access/all-agents/", page_name, suffix)
+  response_url <- paste0(prefix, lang, "all-access/user/", page_name, suffix)
   
   # Get the API response
   response <- httr::GET(url = response_url)

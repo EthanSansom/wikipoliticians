@@ -97,11 +97,11 @@ wiki_data_clean_position <-
   mutate(
     position = 
       case_when(
-        str_detect(positionLabel, "(?i)Deputy|Associate|Spouse|List") ~ positionLabel,
+        str_detect(positionLabel, "(?i)Deputy|(?i)Associate|(?i)Spouse|(?i)List") ~ positionLabel,
         str_detect(positionLabel, "(?i)Prime.*Minister") ~ "Prime Minister",
         str_detect(positionLabel, "(?i)Premier") ~ "Premier",
         str_detect(positionLabel, "(?i)Minister") ~ "Minister",
-        str_detect(positionLabel, "(?i)Leader.*Party|Party.*Leader") ~ "Party Leader",
+        str_detect(positionLabel, "(?i)Leader.*Party|(?i)Party.*Leader|(?i)Leader.*Opposition") ~ "Party Leader",
         str_detect(positionLabel, "(?i)Member.*of.*Senate") ~ "Senate Member",
         str_detect(positionLabel, "(?i)Member.*of.*House.*Commons") ~ "House Member",
         str_detect(positionLabel, "(?i)Mayor") ~ "Mayor",
@@ -194,7 +194,4 @@ party_map <-
 
 # Save Cleaned Data ------------------------------------------------------------
 write_csv(x = wiki_data_clean, file = here("inputs/data/wiki_data_clean.csv"))
-
-
-
 
