@@ -1,13 +1,13 @@
 ---
 title: "Determinants of Canadian Politicians' Popularity on Wikipedia."
 author: "Ethan Sansom"
-date: "6 April 2022"
+date: "27 April 2022"
 output:
   bookdown::pdf_document2:
 toc: yes
 thanks: "Code and data are available at: https://github.com/EthanSansom/wikipoliticians"
 bibliography: references.bib
-abstract: "Voters internationally are increasingly using the internet as a primary tool to access information on politicians and political parties. Consequently, politcal organizers and researchers alike are using online platforms, such as Twitter, Facebook, and more recenlty Wikipedia, to analyze the sentiments of voters. This paper investigates the correlation between Canadian politicians' characteristics - including party affiliation, political position, age, and gender - and politicians' Wikipedia page views in the months prior to the 2021 Federal Election. Wikipedia page views are found to be greater for politicians in more popular parties, and for Party Leaders, Ministers, and Prime Ministers in particular. \\par \\vspace{3mm} \\textbf {Keywords:} Canada elections, election forecasting, Wikipedia, linear regression"
+abstract: "Voters internationally are increasingly using the internet as a primary tool to access information on politicians and political parties. Consequently, politcal organizers and researchers alike are using online platforms, such as Twitter, Facebook, and more recenlty Wikipedia, to analyze the sentiments of voters. This paper investigates the relationship between Canadian politicians' characteristics - including party affiliation, political position, and age - and politicians' Wikipedia page views in the months prior to the 2021 Federal Election. Wikipedia page views are found to be somewhat greater for politicians in more popular parties, and for Party Leaders, Ministers, and Prime Ministers in particular. \\par \\vspace{3mm} \\textbf {Keywords:} Canada elections, election forecasting, Wikipedia, linear regression"
 ---
 
 ```{r setup, include = FALSE}
@@ -16,77 +16,143 @@ library(tidyverse)
 library(knitr)
 library(dplyr)
 library(ggplot2)
-library(here)         # For referencing files in directory
-library(kableExtra)   # For formatting tables
-library(gridExtra)    # For arranging plots
-library(bookdown)     # For cross referencing and citing
-library(ggrepel)      # For adding point labels to plots
-library(modelsummary) # For creating summary tables
-library(performance)  # For evaluating model performance
-library(see)          # For graphing model performance
+library(here)          # For referencing files in directory
+library(kableExtra)    # For formatting tables
+library(gridExtra)     # For arranging plots
+library(bookdown)      # For cross referencing and citing
+library(ggrepel)       # For adding point labels to plots
+library(modelsummary)  # For creating summary tables
+library(performance)   # For evaluating model performance
+library(see)           # For graphing model performance
+library(scales)        # For customizing axis scales
+library(DiagrammeR)    # For plotting DAGs
+library(DiagrammeRsvg) # For plotting DAGs
+library(rsvg)          # For plotting DAGs
+library(cowplot)       # For arranging plots
+library(ggcorrplot)    # For correlation heatmap
+library(gtsummary)     # For summary table
+
+# Set seed for replication
+set.seed(1)
 
 # Load Data --------------------------------------------------------------------
-wiki_data <- read_csv(here("inputs/data/wiki_data_pages.csv"))
+wiki_data <- read_csv(here("inputs/data/wiki_data_pages_clean.csv"))
 
-# Get the total page views for each politician
-wiki_data <-
-  wiki_data |>
-  rowwise() |>
-  mutate(page_views = sum(across(starts_with("views"), na.rm = TRUE)))
-
-# Create Party Factor and Position Factor Variable
+# Create ordered Party Factor and Position Factor Variable
 wiki_data <-
   wiki_data |>
   mutate(
-    party = case_when(
-      cp == 1 ~ "CPC",
-      liberal == 1 ~ "Liberal",
-      green == 1 ~ "Green",
-      ndp == 1 ~ "NDP",
-      bq == 1 ~ "BQ"
+    party = factor(party, levels = c("Liberal", "CPC", "NDP", "BQ", "Green"))
+  )
+
+# Assign Colors to Each Party and 2021 Party Leader
+leader_name <- 
+  c(
+    "Justin Trudeau",	
+    "Erin O'Toole", 
+    "Jagmeet Singh", 
+    "Annamie Paul", 
+    "Yves-François Blanchet"
     )
+
+leader_colour = 
+  c(
+    "Justin Trudeau" = "#C1292E",
+    "Erin O'Toole" = "#1B9AAA",
+    "Jagmeet Singh" = "#F26419",
+    "Yves-François Blanchet" = "#003F91",
+    "Annamie Paul" = "#6DA34D"
+  )
+
+party_colour = 
+  c(
+    "Liberal" = "#C1292E",
+    "CPC" = "#1B9AAA",
+    "NDP" = "#F26419",
+    "BQ" = "#003F91",
+    "Green" = "#6DA34D"
   )
 ```
 
 \newpage
 
 # Introduction
-Online search engines are increasingly the avenue by which voters internationally access information on political candidates in their countries. A reported 68% of internet-using voters in Germany, France, Italy, Spain, Poland, the United Kingdom, and the United States, for instance, rated online searches as an important factor in their voting choices [@Pradel]. Such internet usage provides political organizers, pundits, and researchers a wealth of relatively easy to access on the voting preferences and attitudes of the electorate. An increasingly large number of researchers have used name mentions of political parties or individual politicians on social media platforms such as Twitter and Facebook to measure the popularity of politicians and political parties [@Smith; @Yasseri]. Such measures, however, are limited in their predictive abilities of voter behavior. Name mentions alone, for example, do not indicate a positive or negative attitude towards a politician or party [@Yasseri]. Further, investigating social media platforms alone limits the sample of voters investigated to those who both participate in social media and use social media platforms as a venue for communicating political views [@Yasseri]. Pressures to adhere to the political views of social circles, and potential negative outcomes at home or in the workplace of voicing divisive political views on a public platform, can additionally mask or misrepresent the intentions of voters on social media platform [@Yasseri]. Authors @Salem argue that Wikipedia, the online encyclopedia, offers a better platform for accurately modelling voters' intentions. Specifically, the number of views of a given politician's or political party's Wikipedia page over a given time period can provide a strong measure of the number individuals searching for information about the politician or party [@Yasseri; @Salem]. Such information-seeking behavior has been shown to be reflective of the true public voting interest for certain candidates [@Salem]. Wikipedia page viewership, and other Wikipedia page metrics then, may offer a less ambiguous and more predictive measure of voting intent than that of other internet platforms.
+Online search engines are increasingly the avenue by which voters internationally access information on political candidates in their countries. A reported 68% of internet-using voters in Germany, France, Italy, Spain, Poland, the United Kingdom, and the United States, for instance, rated online searches as an important factor in their voting choices [@Pradel]. Such internet usage provides political organizers, pundits, and researchers a wealth of relatively easy to access on the voting preferences and attitudes of the electorate. An increasingly large number of researchers have used name mentions of political parties or individual politicians on social media platforms such as Twitter and Facebook to measure the popularity of politicians and political parties [@Smith; @Yasseri]. Such measures, however, are limited in their predictive abilities of voter behavior. Name mentions alone, for example, do not indicate a positive or negative attitude towards a politician or party [@Yasseri]. Further, investigating social media platforms alone limits the sample of voters investigated to those who both participate in social media and use social media platforms as a venue for communicating political views [@Yasseri]. Pressures to adhere to the political views of social circles, and potential negative outcomes at home or in the workplace of voicing divisive political views on a public platform, can additionally mask or misrepresent the intentions of voters on social media [@Yasseri]. Authors @Salem argue that Wikipedia, the online encyclopedia, offers a better platform for accurately modelling voters' intentions. Specifically, the number of views of a given politician's or political party's Wikipedia page over a given time period can provide a strong measure of the number individuals searching for information about the politician or party [@Yasseri; @Salem]. Such information-seeking behavior has been shown to be reflective of the true public voting interest for certain candidates [@Salem]. Wikipedia page viewership, and other Wikipedia page metrics then, may offer a less ambiguous and more predictive measure of voting intent than that of other internet platforms. Thus, for researchers, pundits, pollsters, and political organizers alike, Wikipedia represents an important potential tool for predicting elections and describing the political attitude of the electorate.
 
-To explore the potential of assessing voter behaviors and perceptions using Wikipedia in the context of Canadian elections, this paper investigates the Wikipedia presence and viewership of Canadian politicians from the five major Canadian federal political parties, the Liberal Party, Conservative Party, New Democratic Party (NDP), Green Party, and the Bloc Québécois. Using monthly data on Wikipedia page views from January 1st 2021 to January 1st 2022, this paper performs a multiple linear regression to investigate the correlation between characteristics of Canadian politicians and their Wikipedia page viewership. In particular, variables gender, age, political position, and party affiliation, are used to model the number of Wikipedia page views received by Canadian politicians. Additionally, the page views of Canadian federal party leaders, namely Justin Trudeau (Liberal),	Erin O'Toole (Conservative), Jagmeet Singh (NDP), Annamie Paul (Green), and	Yves-François Blanchet (Bloc Québécois), in the months preceding the 2021 Canadian federal election are compared with the 2021 election results. The Wikipedia page views of party leaders in the months preceding the election are shown to accurately predict the order of party vote share, from most to least votes. In the full sample of Canadian politicians on Wikipedia, it is found that political party affiliation is correlated with Wikipedia viewership. The Wikipedia pages of Green Party and Bloc Québécois politicians are shown to have substantially fewer page views on average than those of politicians in larger parties. Political position, specifically the positions of Prime Minister, Minister, and Party Leader, are shown to be very strongly correlated with page viewership as well.
+In this paper, the Wikipedia pages of Canadian politicians are investigated to assess the viability of using Wikipedia for election forecasting and analyzing voter sentiment in Canada. Using monthly data on Wikipedia page views from January 1st 2021 to January 1st 2022, we compare the Wikipedia viewership of politicians from the five major Canadian Federal political parties, the Liberal Party, Conservative Party, New Democratic Party (NDP), Green Party, and the Bloc Québécois, to the results of the 2021 Canadian Federal Election. The page views of party leaders during this time, namely Justin Trudeau (Liberal),	Erin O'Toole (Conservative), Jagmeet Singh (NDP), Annamie Paul (Green), and	Yves-François Blanchet (Bloc Québécois), are similarly compared to the realized election outcomes. Wikipedia age views of both party members and leaders are shown to closely align with the results of the 2021 election. The parties with the first, second, and third most page views respectively, the Liberal, Conservative, and New Democratic Parties, likewise received the first, second, and third most votes in the federal election. To further investigate the correlation between party affiliation, political position, politician characteristics, and Wikipedia page views, we estimate a multiple linear regression model. In particular, we regress page views on politician indicators for party affiliation, political position, and politician birth year. The model results show that political positions, specifically Prime Minister, Minister, and Party Leader, are associated with a large increase in Wikipedia page views. Additionally, the model somewhat reaffirms the party rankings observed in overall page views. For instance affiliation with the Liberal and Conservative parties are associated with greater page views than the NDP politicians, while affiliation with the Bloc Québécois is associated with fewer page views. The linear models used in this paper, however, are shown to be substantially limited in terms of internal and external validity, warranting additional future analysis with different modelling techniques.
 
-In the following sections of this paper, a brief description of the data collection and cleaning process is provided, followed by an investigation of the data itself. The Model \@ref(model) section describes the multiple linear regression framework used in this analysis, including a discussion of the model's assumptions and subsequent limitations. In the Results \@ref(results) section, the implications of the model estimates and the results of the data investigation are described. Finally, in the Discussion \@ref(discussion) section, the results are analysed in the context of the 2021 federal election results and the political views of the Canadian electorate more broadly. The paper concludes with a discussion if its limitations, including the challenges to the external validity of the model and the ability of Wikipedia page viewership to serve as a valid proxy for voter interest. For this analysis, the R statistical software [@citeR] is used to import and clean Wikipedia page data, perform regression model estimation and data visualization, and compile the paper itself. Packages `tidyverse` [@citetidyverse] and `dplyr` [@citedplyr] are used to manipulate data, `ggplot2` [@citeggplot2], `gridExtra` [@citegridExtra], and `kableExtra` [@citekableExtra], are used for creating tables and plots, and `ggrepel` [@citeggrepel] is used to customize plot labels. To access web APIs, the package `httr` [@citehttr] is used, and for scraping HTML data the package `rvest` [@citervest] is used. The package `here` [@citehere] is used for to simplify reading and writing data within the file directory. Lastly, packages `bookdown` [@citebookdown], `knitr` [@citeknitr], and `tinytex` [@citetinytex] are utilized to format and compile the final paper.
+In the following Data Section \@ref(data) of this paper, the data collection and variable selection processes are discussed. The effects of politician birth year, party affiliation, and political position on Wikipedia page views are visualized. The Model Section \@ref(model)  describes the multiple linear regression framework used in this analysis and proposes a causal justification for variables selected. In the Results Section \@ref(results), several linear models are compared and evaluated. Additionally, the results of the 2021 Federal election are compared with Wikipedia page viewership. Finally, in the Discussion Section \@ref(discussion), the results are analysed in the context of the 2021 federal election results and the political views of the Canadian electorate more broadly. The limitations of the sample and model specification are further discussed, including the challenges to the internal validity of the linear regression models used and the ability of Wikipedia page viewership to serve as a valid proxy for voting intention. 
+
+For this analysis, the R statistical software [@citeR] is used to import and clean Wikipedia page data, perform regression model estimation and data visualization, and compile the paper itself. Packages `tidyverse` [@citetidyverse] and `dplyr` [@citedplyr] are used to manipulate data, `ggplot2` [@citeggplot2], `gridExtra` [@citegridExtra], and `kableExtra` [@citekableExtra], are used for creating tables and plots, and `ggrepel` [@citeggrepel] is used to customize plot labels. A number of packages, `see` [@citesee], `scales` [@citescales], `DiagrammeR` [@citediagrammeR], `DiagrammeRsvg` [@citediagrammeRsvg],  `rsvg` [@citersvg], `cowplot` [@citecowplot], `ggcorrplot` [@citeggcorrplot], and `gtsummary` [@citegtsummary], provide additional aesthetic adjustments, summary tables, and visualizations. Packages `modelsummary` [@citemodelsummary] and `performance` [@citeperformance] are used to display the results and assumptions of linear regression models. To access web APIs, the package `httr` [@citehttr] is used, and for scraping HTML data the package `rvest` [@citervest] is used. The package `here` [@citehere] is for file management. Lastly, packages `bookdown` [@citebookdown], `knitr` [@citeknitr], and `tinytex` [@citetinytex] are utilized to format and compile the final paper.
 
 # Data
 
-```{r outliers, echo = FALSE, message = FALSE, warning = FALSE}
+## Collection
+
+This paper analyses data from Wikipedia, which is a self-described free digital encyclopedia that hosts greater than six million English language entries and is currently the most popular reference website on the internet [@Wikipedia; @Salem]. To collect this data, the Wikidata database and associated API, which stores structured data on Wikipedia articles, was used to query the full set of biographies of Canadian politicians available on Wikipedia [@Wikidata]. The set of articles was then filtered to include only Canadian politicians on Wikipedia affiliated with one of the five major federal political parties or their predecessors^[Provincial parties, such as the Ontario Liberal Party, are also coded under their Federal counterparts.], resulting in a final sample of 7856 Wikipedia pages^[A shiny supplement to explore the Wikipedia dataset is linked here: https://7wouif-ethan-sansom.shinyapps.io/shiny/]. Table \@ref(tab:datasample) displays a sample of the final dataset used for this analysis.
+
+```{r datasample, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Sample Wikipedia Data"}
+# Display a sample of the data set ---------------------------------------------
+head(wiki_data |> select(name, party, birthyear, prime_minister, party_leader, minister, page_views), 5) |>
+  knitr::kable(
+    align = "cccccc",
+    col.names = c(
+      "Name",
+      "Party",
+      "Birth Year",
+      "Prime\nMinister",
+      "Party\nLeader",
+      "Minister",
+      "Page Views"
+      ),
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Sample Wikipedia Data"
+  ) |>
+  
+  # Adjust font size
+  kableExtra::kable_styling(font_size = 9, latex_options = "hold_position")
+```
+
+The variables for politicians' party affiliation, birth year, and political position are available via the Wikidata API. Page views, which measure the number of distinct times a human Wikipedia user viewed each page during the year 2021, were collected separately using the Wikimedia REST API [@Wikimedia]. The monthly page views of each article in 2021 are recorded as well, although not displayed in Table \@ref(tab:datasample) for brevity. Each of Prime Minister, Minister, and Party Leader are equal to 1 if the politician held that political position at some point, at the Federal or Provincial level, and 0 otherwise. Party is a categorical variable denoting the party affiliation of each politician. While the majority of politicians in the sample were affiliated with a single party, 81 politicians' Wikipedia pages recorded affiliation with multiple parties. For the purposes of this investigation, these politicians were manually assigned to the party with which they were most recently affiliated.
+
+Notably, the Wikidata query used in this paper was language agnostic, and included Wikipedia pages available in all languages. The page views, however, are those views from English language Wikipedia, with the exception of Sue Montgomery's biography, which was available only on French language Wikipedia. Consequently, while the sample of pages included is not limited by language, page views are biased towards politicians with primarily English speaking voters. This is particularly problematic for the analysis of pages associated with the Bloc Québécois, the most popular political party in Quebec, which contains the majority of Canada's French speaking population [@Cross].
+
+## Description
+
+The majority of Wikipedia pages in the sample were viewed fewer than 1000 times in 2021, with some notable outliers in each party. Figure \@ref(fig:outliers) depicts the page views of every politician in the sample, with the 2021 Federal election candidates from each party labelled by name.
+
+```{r outliers, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Wikipedia Page Views of Canadian Politicians by Party"}
+# Plot the outlying observations -----------------------------------------------
 # Get the positions of jittered points
 pos <- position_jitter(width = 0.1, seed = 1)
 
-# Assign Colors to Each Party
-party_colour = 
-  c(
-    "BQ" = "#003F91",
-    "Green" = "#6DA34D",
-    "CPC" = "#1B9AAA",
-    "NDP" = "#F26419",
-    "Liberal" = "#C1292E"
-  )
-
-# Plot Outliers
+# Plot with Outliers
 wiki_data |>
-  ggplot( aes(x = party, y = page_views, label = if_else(page_views > 500000, name, "")), position = pos) +
+  ggplot(
+    aes(
+      x = party, 
+      y = page_views,
+      colour = party,
+      # Label only party leaders, split Yves into two lines for display
+      label = case_when(
+        name == "Yves-François Blanchet" ~ "Yves-François\nBlanchet",
+        name %in% leader_name ~ name,
+        TRUE ~ ""
+        )
+      ), 
+    position = pos
+    ) +
   
     # Plot Points
-    geom_point(aes(colour = party), alpha = 0.7, position = pos) +
+    geom_point(alpha = 0.7, position = pos) +
     
-    # Label Points Belonging to Outliers (pages with > 500,000 views)
+    # Label Points Belonging to Party Leaders
     geom_text_repel(
       position = pos,
-      box.padding = 1,
-      segment.curvature = 0.5,
-      segment.ncp = 5,
-      segment.angle = 90
+      size = 2.5,
+      box.padding = 0.2,
+      show.legend = FALSE
     ) +
     
     # Plot Labels
@@ -94,160 +160,289 @@ wiki_data |>
     ylab("Page Views") +
     labs(
       title = "Page Views by Political Party",
-      subtitle = "Pages with Greater than 500,000 Views are Labelled",
-      colour = "Party"
+      subtitle = "Pages of 2021 Federal Electoral Candidates are Labelled",
+      colour = ""
       ) +
     
     # Set Theme and Color Scheme
     theme_minimal() +
+    theme(legend.position = "top") +
     scale_color_manual(values = party_colour) +
     scale_y_continuous(labels = scales::number, breaks = seq(0, 3000000, 500000))
 ```
 
+The leaders of the Liberal, Conservative, New Democratic, Bloc Québécois, and Green parties are the most viewed pages within their respective parties. Justin Trudeau, who was reelected as Prime Minister in the 2021 Federal Election, has the most page views of any page by a wide margin, with greater than 2,500,000 page views. Erin O'Toole and Jagmeet Singh are the third and fourth most viewed pages, with near 1,000,000 page views each. Finally, Green and Bloc Québécois leaders Annamie Paul and Yves-François Blanchet have nearly 500,000 and 250,000 page views respectively.
+
 \newpage
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-# Plot -> filter PM's and Party Leaders
-wiki_data |>
-  filter(prime_minister == 0, party_leader == 0) |>
-  ggplot(aes(x = party, y = page_views, label = if_else(page_views > 500000, name, "")), position = pos) +
+Politicians which have held the position of Prime Minister, Party Leader, or Minister received substantially more page views in 2021 than those with no prior position. The median page views of non-position politicians, shown in Figure \@ref(fig:viewsdist), is less than 1000 for all parties except Green. Median page views of Liberal, Conservative, Bloc Québécois, and Green party Prime Ministers, Party Leaders, and Ministers are all greater than 10,000. The distributions of non-position politicians page views have long left and right tails, with the exception of the Green party, indicating a number of outlying politicians with near zero or greater than 10,000 Wikipedia page views in 2021.
+
+```{r viewsdist, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Distribution of Wikipedia Page Views by Party and Position"}
+# Plot the page views distribution by party and position
+page_views_dist <-
+  wiki_data |>
   
-  # Plot Points
-  geom_point(aes(colour = party), alpha = 0.7, position = pos) +
+  # Create facet groups of full sample and positioned politicians
+  mutate(
+    has_position = if_else(
+      (prime_minister + minister + party_leader > 0), 
+      "Prime Ministers, Party Leaders, and Ministers",
+      "Non-Position Holding Politicians"
+      )
+    ) |>
   
-  # Label Points Belonging to Prime Ministers
-  geom_text_repel(
-    position = pos,
-    box.padding = 1,
-    segment.curvature = 0.5,
-    segment.ncp = 5,
-    segment.angle = 90
-  ) +
-  
-  # Plot Labels
-  xlab("Party") +
-  ylab("Page Views") +
-  labs(
-    title = "Page Views by Political Party",
-    subtitle = "Prime Ministers and Party Leaders are Ommitted",
-    colour = "Party"
+  # Plot the distributions of page views by party
+  ggplot(aes(y = page_views, x = party, fill = party, colour = party)) +
+    geom_violin(alpha = 0.3, draw_quantiles = c(0.5)) +
+    
+    # Apply log base 10 transformation to page views scale for better visibility
+    scale_y_log10(labels = scales::number, breaks = c(10, 100, 1000, 10000, 100000, 1000000)) +
+    coord_trans(y = "log10") +
+    
+    # Set labels
+    labs(
+      title = "Distribution of Wikipedia Page Views by Party and Position",
+      subtitle = "Horizontal lines indicate the median page views of each party.",
+      fill = "",
+      colour = "",
+      x = "Party",
+      y = "Page Views (Log Base 10 Scale)"
     ) +
+    
+    # Set color scheme
+    scale_fill_manual(values = party_colour) +
+    scale_color_manual(values = party_colour) +
   
-  # Set Theme and Color Scheme
-  theme_minimal() +
-  scale_color_manual(values = party_colour) +
-  scale_y_continuous(labels = scales::number)
+    # Set theme
+    theme_minimal() +
+    theme(legend.position="top")
+
+# Display the plot
+page_views_dist + facet_wrap(~ has_position)
 ```
 
+The Green party, which appears to receive more views on average than any other party, is particularly underrepresented on Wikipedia. The sample contains just 21 pages of Green party affiliated politicians, which have an average of 37,755.10 page views (Table \@ref(tab:balance)). Notably, around 24% (2) of the Green party pages are party leaders, belonging to Annamie Paul and her predecessor Elizabeth May, which are the most viewed Green party pages. Page views within the sample of Green party are highly variable, with a sample standard deviation of 102,172.28, far greater than that of any other party. This indicates that the high average page views within the Green party is attributable to a few large outliers, which are highly influential in the small sample of 21 observations. Liberal party politicians had 3891.16 page views in 2021 on average (SD = 52,253.64), Conservatives 3167.43 (SD = 25,582.84), New Democrats 4499.04 (SD = 34,394.34), and Bloc Québécois politicians 3112.21 (SD = 14,774.53). Average page views do not differ substantially between parties, with the exception of the Green party, however the within party variation in page views is comparably very large. Only two of the five parties, Liberal and Conservative, have Prime Minister's among their members^[The paper sample includes all 23 of Canada's Prime Ministers.]. Four of the five parties, with the exception of the Green Party, are composed of between 1% and 4% Party Leaders and Ministers.
+
 \newpage
 
-```{r tsleaders, echo = FALSE, message = FALSE, warning = FALSE}
-electoral_candidates <- c("Justin Trudeau",	"Erin O'Toole", "Jagmeet Singh", "Annamie Paul", "Yves-François Blanchet")
-
-election_ts <-
+```{r balance, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Balance Table of Variables by Party"}
+# Prepare data for summary
+summary_data <-
   wiki_data |>
-  filter(name %in% electoral_candidates)
-
-election_ts <-
-  election_ts |>
-  select(party, name, starts_with("views")) |>
-  
-  # Pivot to plot time series data by party
-  pivot_longer(
-    cols = starts_with("views"),
-    names_to = "month",
-    names_prefix = "views_m",
-    values_to = "views"
-  ) |>
-  
-  # Create numeric month variable
-  mutate(month = as.numeric(month))
-
-# Assign Colors to Each Party Leader
-leader_colour = 
-  c(
-    "Yves-François Blanchet" = "#003F91",
-    "Annamie Paul" = "#6DA34D",
-    "Erin O'Toole" = "#1B9AAA",
-    "Jagmeet Singh" = "#F26419",
-    "Justin Trudeau" = "#C1292E"
+  select(page_views, birthyear, prime_minister, party_leader, minister, party) |>
+  mutate(prime_minister = prime_minister*100, party_leader = party_leader*100, minister = minister*100) |>
+  rename(
+    "Page Views" = page_views,
+    "Birth Year" = birthyear,
+    "Prime Minister (%)" = prime_minister,
+    "Party Leader (%)" = party_leader,
+    "Minister (%)" = minister,
+    "Party" = party
   )
 
-election_ts |>
-  ggplot(aes(x=month, y=views, label = name, colour = name)) +
-  geom_line() +
-  theme_minimal() +
-  theme(legend.position = "top", legend.text = element_text(size = 7)) +
-  
-  geom_text_repel(
-    data = election_ts |> filter(name == "Justin Trudeau", month == 9),
-    aes(label = "Federal Election on September 20th"),
-    colour = "black",
-    nudge_x = -2.5,
-    nudge_y = -50000,
-    segment.curvature = 0.5,
-    segment.ncp = 5,
-    segment.angle = 90,
-    size = 3,
-    show.legend = FALSE
-  ) +
-  
-  # Set Labels
-  labs(
-    x = "Month",
-    y = "Pageviews",
-    title = "Federal Election Candidates 2021 Monthly Pageviews",
-    colour = ""
-  ) +
-  
-  # Set Scales
-  scale_colour_manual(values = leader_colour) +
-  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
-  scale_y_continuous(labels = scales::number)
-```
-
-\newpage
-
-```{r tsparties, echo = FALSE, message = FALSE, warning = FALSE}
-parties_ts <-
-  wiki_data |>
-  group_by(party) |>
-  summarize(across(starts_with("views"), ~sum(.x, na.rm = TRUE))) |>
-  
-  # Pivot to plot time series data by party
-  pivot_longer(
-    cols = starts_with("views"),
-    names_to = "month",
-    names_prefix = "views_m",
-    values_to = "views"
+# Create a balance table
+datasummary_balance(
+  formula = ~ Party, 
+  data = summary_data, 
+  dinm = FALSE, 
+  fmt = "%.2f", 
+  title = "Balance Table of Variables by Party"
   ) |>
-  
-  # Create numeric month variable
-  mutate(month = as.numeric(month))
-
-parties_ts |>
-  ggplot(aes(x=month, y=views, colour = party)) +
-  geom_line() +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  
-  # Set Labels
-  labs(
-    x = "Month",
-    y = "Pageviews",
-    title = "Federal Parties 2021 Monthly Pageviews",
-    colour = ""
-  ) +
-  
-  # Set Scales
-  scale_colour_manual(values = party_colour) +
-  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
-  scale_y_continuous(labels = scales::number)
+  kableExtra::landscape() |>
+  kable_styling(font_size = 10)
 ```
 
 \newpage
 
-```{r proportions, echo = FALSE, message = FALSE, warning = FALSE}
+Table \@ref(tab:datasummary) shows summary statistics of the full sample of politicians, which are similar to those of the Liberal, Conservative, New Democratic, and Bloc Québécois parties, indicating that there is little between party variation in the sample.
+
+```{r datasummary, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Descriptive Statistics of Continuous Variables"}
+# Prepare data for summary
+summary_data <-
+  wiki_data |>
+  select(page_views, birthyear, prime_minister, party_leader, minister, party) |>
+  mutate(prime_minister = prime_minister*100, party_leader = party_leader*100, minister = minister*100) |>
+  rename(
+    "Page Views" = page_views,
+    "Birth Year" = birthyear,
+    "Prime Minister (%)" = prime_minister,
+    "Party Leader (%)" = party_leader,
+    "Minister (%)" = minister,
+    "Party" = party
+  )
+
+# Create summary table
+datasummary(
+  `Page Views` + `Birth Year` + `Prime Minister (%)` + `Party Leader (%)` + `Minister (%)` ~ 
+    Mean + SD + (`Missing (%)` = PercentMissing),
+  data = summary_data,
+  fmt = 2,
+  title = "Descriptive Statistics of Continuous Variables"
+  ) |>
+  kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+Figure \@ref(fig:ageviews) depicts the density of page views by politician birth year. Page views appear to increase as politician birth year increases, with the majority of page views attributable to politicians born between 1930 and 1970. At nearly all birth years, from the early 1800's to 1980's, there remain outlying politicians with greater than 100,000 page views. Relatively few politicians born before 1925, however, received greater than 10,000 page views during 2021.
+
+```{r ageviews, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Distribution of Wikipedia Page Views by Politican Birth Year"}
+# Plot the distribution of page views by politician birth year -----------------
+ggplot(data = wiki_data, aes(x = birthyear, y = page_views)) +
+  geom_bin2d(bins = 50) +
+  
+  # Apply transformation to y-axis
+  scale_y_log10(labels = scales::number, breaks = c(10, 100, 1000, 10000, 100000, 1000000)) +
+  scale_fill_continuous(type = "viridis") +
+  
+  # Set labels
+  labs(
+    x = "Birth Year",
+    y = "Page Views (Log Base 10 Scale)",
+    title = "",
+    fill = "Frequency"
+  ) +
+  
+  # Set theme
+  theme_minimal()
+```
+
+\newpage
+
+# Model
+
+## Causal Relationship
+
+The utility of Wikipedia page views as a source of data for predicting elections and measuring the favourability of political parties is predicated on Figure \@ref(fig:causalgraph), which depicts a causal relationship between a politicians' political affiliation and the Wikipedia page views which the politician receives. If a party's popularity causes the Wikipedia page views of its members to increase, then analysts, pundits, and political organizers alike can use Wikipedia as a tool to accurately assess or forecast election outcomes based on the page views and party affiliation of politicians.
+
+```{r causalgraph, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Casual Relationship Between Party Affiliation and Page Views"}
+# Create the graph for the DAG
+diagram <- DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = LR]
+  
+  # Define the nodes of the DAG
+  node [shape = square, color = Black]        
+  outcome [label = 'Page Views']
+  party [label = 'Party\nAffiliation']
+  
+  # Define the edges of the DAG
+  edge [color = Black, arrowhead = vee]
+  party -> outcome [label = 'Voter Information Seeking']
+  }",
+  height = 1000,
+  width = 1000)
+
+# Save diagram as SVG
+# SVG render code with help from: https://github.com/rich-iannone/DiagrammeR/issues/133
+diagram |>
+  DiagrammeRsvg::export_svg() |>
+  charToRaw() |>
+  rsvg::rsvg_png(here("outputs/paper/dag_1.png"), width = 1000)
+
+# Render SVG as plot
+ggplot() +
+  theme_void() +
+  cowplot::draw_image(here("outputs/paper/dag_1.png"), width = 0.75)
+```
+
+This simple relationship is premised on two assumptions. Firstly, voters' information seeking causes the Wikipedia page views of politicians to increase. This is an intuitive assumption, as Wikipedia is an encyclopedia and has little utility to most constituents other than as a source of information. Further, several studies have demonstrated that voters frequently use the internet broadly, and Wikipedia specifically, as a source of political information [@Bright; @Yasseri; @Salem]. Table Figure \@ref(fig:tsleaders) and Figure \@ref(fig:tsparties) demonstrate that Canadian politician's Wikipedia page views spike nearing a Federal election, suggesting that people access politician's Wikipedia pages when they become relevant for making voting decisions. 
+
+Secondly, it is assumed that a politicians' party affiliation causes voters to change their information seeking behavior regarding that politician. Specifically, that association with a popular political party causes an increase in voter information seeking, and consequently Wikipedia page views, compared to an association with a less favorable party. While less obvious than the previous claim, this assumption has been reaffirmed in similar contexts. In an analysis of European Parliamentary elections, @Bright found theoretical and empirical evidence suggesting that Wikipedia is an important source of information for undecided swing-voters. These voters are more likely to seek information on parties with improving popularity, which tend to attract swing voters, and on small parties, for which less information is available elsewhere [@Bright]. @Kam assert that prior to elections, voters seek to both maximize on information on electoral candidates and minimize personal effort, resulting in voters limiting their information seeking towards a small number of strong candidates for election. Using both observational and experimental data, @Kam found a positive relationship between a candidate's political viability and Google searchers for the candidate's name. Assuming that stronger political parties produce, or are produced by, stronger political candidates, this indicates that a party's political viability generates increased information seeking by the party's voter base.
+
+To accurately assess the magnitude and direction of the relationship between party affiliation and Wikipedia page views, it is important to consider additional factors which are causally related to both party affiliation and page views. Figure \@ref(fig:dag) depicts a more complicated causal relationship, in which the effect of party affiliation on page views is confounded by politicians' birth year, and page views is additionally related to politician's political position and notoriety.
+
+\newpage
+
+```{r dag, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Proposed Causal Model"}
+# Create the graph for the DAG
+diagram <- DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = LR]
+  
+  # Define the nodes of the DAG
+  node [shape = square, color = Black]        
+  outcome [label = 'Page Views']
+  party [label = 'Party\nAffiliation']
+  
+  # Define covariate/counfounding nodes as circles
+  node[shape = oval, color = Black]
+  position [label =  'Political\nPosition']
+  birth [label =  'Birth\nYear']
+  notoriety [label =  'Notoriety']
+  
+  # Define the edges of the DAG
+  edge [color = Black, arrowhead = vee]
+  party -> {outcome}
+  position -> {outcome}
+  birth -> {party, outcome}
+  
+  # Add dashed edges to unobserved variable
+  edge [color = Black, arrowhead = vee, style = dashed]
+  position -> {notoriety}
+  notoriety -> {outcome}
+  }",
+  height = 500,
+  width = 500)
+
+# Save diagram as SVG
+# SVG render code with help from: https://github.com/rich-iannone/DiagrammeR/issues/133
+diagram |>
+  DiagrammeRsvg::export_svg() |>
+  charToRaw() |>
+  rsvg::rsvg_png(here("outputs/paper/dag_2.png"), width = 1000)
+
+# Render SVG as plot
+ggplot() +
+  theme_void() +
+  cowplot::draw_image(here("outputs/paper/dag_2.png"), width = 0.75)
+```
+
+Only two of the five major political parties in Canada, the Liberal and Conservative parties, have existed in some form prior to 1950 [@Cross]. Thus, politicians who died prior to 1950 were forced, within this sample, to either affiliate with the Liberal or Conservative parties. This is the main justification for the causal effect of politician birth year on party affiliation. @Peterson find in a longitudinal study of American adults that political leanings are also somewhat more likely to shift from liberal to conservative with age, although the authors caution against early work which reported stronger impacts of aging on political views. The mechanism by which politicians' birth year effect page views is similar to that of party affiliation, namely that politicians who are still alive and are young enough to continue seeking office remain relevant to voters and thus encourage information seeking behavior. Given that politicians' birth year is related to both the page views and party affiliation, it is considered a confounding variable and should be accounted for when modelling the causal effect of party affiliation on page views [@Dablander]. Failure to do so will result in models which misrepresent the effect of party affiliation on page views, some of which is attributable to the effect of politicians' birth year.
+
+Additionally, a politicians' political position, such as Prime Minister or Party Leader, is likely to causally effect their Wikipedia page views by the same mechanism as party affiliation. Specifically, politicians with more influential positions and which participate in larger, more consequential elections, are more relevant to voters and will thus encourage greater information seeking behavior relative to other politicians in less influential positions. This effect is further mediated by an unobserved variable in the sample of politicians' Wikipedia pages, notoriety. The assumption being that politicians' of greater political status have the power to make more consequential mistakes, and thus become controversial. Constituents then, are incentivised to seek further information on the politician's actions, which are relevant for making voting decisions.
+
+\newpage
+
+## Model Specification
+
+The following linear model will be used to estimate the causal relationship depicted in Figure \@ref(fig:dag).
+
+\begin{equation}
+Pageviews_i = \beta_0 + \beta_1 (Birthyear_i - 1950) + \alpha Party_i + \gamma Position_i + \epsilon_i,
+\end{equation}
+
+The outcome variable, $Pageviews_i$, is the total number of Wikipedia page views received by politician $i$ in 2021.
+
+$Birthyear_i$ is the year in which politician $i$ was born. Politician birth year is centered about the year 1950 in the model, and thus $\beta_1$ can be interpreted as the change in a politician's page views associated with being born an additional year after 1950.
+
+$Party_i$ is a vector of indicator variables equal to 1 if politician $i$ is affiliated with the named party and 0 otherwise. Specifically, $\alpha Party_i = \alpha_1 Liberal_i + \alpha_2 CPC_i + \alpha_3 Green_i + \alpha_4 BQ_i$. Note that an indicator for the NDP is omitted from the model and serves as a reference variable. As politicians in the sample are each affiliated with a single party, if a politician is in none of the parties included in the model ($Liberal_i = CPC_i = Green_i = BQ_i = 0$) then that politician must be affiliated with the NDP. Thus, politician $i$'s inclusion in the NDP is determined by regressors in $Party_i$^[In particular, an indicator $NDP_i$ is a linear combination of the other party indicators, where $NDP_i = Liberal_i + CPC_i + Green_i + BQ_i$.]. Including an indicator for NDP affiliation would render the model perfectly collinear and prevent estimation of the model using ordinary least squares [@Wooldridge]. Estimates of the effect of party affiliation are consequently relative to the effect of NDP affiliation on Wikipedia page views. The estimate of $\alpha_1$, for example, is interpreted as the difference in average page views of Liberal politicians and NDP politicians, holding other covariates constant. A positive $\alpha_1$ would indicate that Liberal politicians receive more page views on average than NDP politicians, other variables held constant.
+
+$Position_i$ is a vector of indicator variables equal to 1 if politician $i$ is has attained the named position at some point in their lifetime and 0 otherwise. In particular, $\gamma Position_i = \gamma_1 PrimeMinister_i + \gamma_2 Minister_i + \gamma_3 PartyLeader_i$. Each coefficient can be interpreted as the change in Wikipedia page views which is associated with a politician having attained the given political position. Note that, unlike party affiliation, in which every politician in the sample is affiliated with a single party, many politicians in the sample have held multiple positions. Thus, the estimate of $\gamma_1$ for instance, measures the additional change in page views, on average and holding other covariates fixed, of attaining the position of Prime Minister.
+
+Finally, $\epsilon_i$ is a random error term.
+
+In addition to the full model, three partial models are estimated to compare the relevance of individual regressors for predicting Wikipedia page views and to reaffirm the role of birth year as a confounding variable. The remaining models have the following functional forms:
+
+\begin{equation}
+Pageviews_i = \beta_0 + \alpha Party_i + \epsilon_i
+\end{equation}
+
+\vspace{-7mm}
+
+\begin{equation}
+Pageviews_i = \beta_0 + \beta_1 (Birthyear_i - 1950) + \alpha Party_i + \epsilon_i
+\end{equation}
+
+\vspace{-7mm}
+
+\begin{equation}
+Pageviews_i = \beta_0 + \gamma Position_i + \epsilon_i.
+\end{equation}
+
+The application of these linear models serve several purposes in this paper. Firstly, the the estimates produced by these models provide a succinct description of how each politician characteristic is correlated with the outcome variable, page views, in the sample. In particular, the regression estimates provide a description of the partial association between page views and politician characteristics, such as birth year or political party, while holding the impact of other characteristics constant^[This could be achieved, less succinctly, by blocking observations into homogeneous groups, politicians of the same party for example, and estimating the correlation between other factors, political position or birth year, and page views within each group.]. Secondly, to the extent that the models’ correctly specify the causal relationship between politicians’ characteristics and politicians’ Wikipedia page views, these estimates provide a measure of the effect of belonging to a particular party on a politicians Wikipedia page views. Under the assumption that Wikipedia page views are themselves a valid proxy variable for voter information seeking, then the models provide a measure of voter interest in each of the five major Canadian Federal political parties. As will be demonstrated in the Model Assumptions Section \@ref(model-assumptions), the linear models in this paper do not appear to correctly specify the relationship between politicians’ characteristics and politicians’ Wikipedia page views, nor do they satisfy the assumptions necessary for the internal validity of linear regression estimation. While falling short of causal inference, the results of these models can nonetheless be used to diagnose how and why linear regression analysis may fail to capture the causal relationship between politicians’ characteristics and page views. The difficulties encountered here can subsequently be used to inform model and sample selection in future papers which analyze Wikipedia usage and information seeking behavior.
+
+# Results
+
+Figure \@ref(fig:proportions) compares the share of Wikipedia pages and page views of each party to the outcomes of the 2021 Federal election. The election gave the Liberal Party a minority government, with 159 Liberal candidates elected to the the House of Commons, with the Conservative Party forming the opposition with 119 seats despite narrowly taking the popular vote [@Bloomberg; @Parliment]. The New Democratic, Bloc Québécois, and Green parties won 25, 33, and 2 of 338 total House seats respectively [@Bloomberg; @Parliment]. The People's Party, not included in this analysis, gained around 4.9% of the popular vote, but failed to elect any candidates to the House of Commons [@Bloomberg].
+
+```{r proportions, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Share of Wikipedia Pages, House of Commons Seats, and Votes by Party"}
 # Create Election results table
 # Seats from https://www.ourcommons.ca/members/en/party-standings (NOTE: 1 Seat to Independent)
 # Vote Share From: https://www.bloomberg.com/graphics/2021-canada-election-live-results/
@@ -258,6 +453,7 @@ election_results <-
     party = c("Liberal", "CPC", "BQ", "NDP", "Green", "Other")
   )
 
+# Manipulate data for plotting
 party_proportions <-
   wiki_data |>
   
@@ -282,9 +478,8 @@ party_proportions <-
   # Pivot for easier graphing
   pivot_longer(!party, names_to = "type", values_to = "percent")
 
+# Plot the proportion of page views, pages, house seats, and vote share by party
 party_proportions |>
-  
-  # Create Plot
   ggplot(aes(x = percent, y = type, fill = party)) +
   geom_bar(stat = "identity", position = "stack") +
   # Text Labels with help from:
@@ -300,8 +495,8 @@ party_proportions |>
   
   # Set labels
   labs(
-    title = "Share of Wikipedia Pages, Page Views, and House Seats by Party",
-    subtitle = "Page Views, Page Count, and Election Results from the 2021",
+    title = "",
+    subtitle = "Election data as of the 2021 Federal election.",
     fill = "",
     x = "Percent Share",
     y = ""
@@ -326,147 +521,308 @@ party_proportions |>
   scale_fill_manual(values = c(party_colour, "Other" = "grey"))
 ```
 
-\newpage
+The share of Wikipedia page views in 2021 for the Liberal (46%), Conservative (38%), and New Democratic (12%) parties are very similar to the parties' share of House seats, 47%, 35%, and 7% respectively, and somewhat similar to the popular vote share. Green party page views and popular vote share appear similar as well. The share of page views of Bloc Québécois affiliated politicians, however, is far less than the share of Bloc Québécois votes and House seats. This is likely due to the downward bias on Bloc Québécois page views in the sample, as noted in the Data Section \@ref(data). The page views used in this analysis are those on English language Wikipedia, and thus fail to capture the Wikipedia activity of majority French speaking voters, many of which live in Quebec and disproportionately support the Bloc Québécois party [@Cross].
 
-```{r dataexp, echo = FALSE, message = FALSE, warning = FALSE}
-# Create a set of bar charts with descriptive statistics by party
-# - avg. page views
-# - avg. NON-Position Page Views
-
-# - avg. page views by position -> PM, Leader, Minister, Other
-
-# - gender share per party - different table
-# - page views per gender
-# - Prime Minister Page Views?
-
-position_views <-
+```{r tsleaders, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Monthly Wikipedia Page Views by Federal Electoral Candidate in 2021"}
+# Plot the 2021 times series of leader page views ------------------------------
+# Get only data for 2021 party leaders
+election_ts <-
   wiki_data |>
-  group_by(position) |>
-  summarize(page_views = mean(page_views, na.rm = TRUE))
+  filter(name %in% leader_name)
 
-summary_data <-
-  wiki_data |>
-  mutate(gender = if_else(gender == "male", 1, 0)) |>
-  select(page_views, gender, birthyear, prime_minister, party_leader, minister, party)
+# Prepare page view data for plotting
+election_ts <-
+  election_ts |>
+  select(party, name, starts_with("views")) |>
+  
+  # Pivot to plot time series data by party
+  pivot_longer(
+    cols = starts_with("views"),
+    names_to = "month",
+    names_prefix = "views_m",
+    values_to = "views"
+  ) |>
+  
+  # Create numeric month variable
+  mutate(month = as.numeric(month))
+
+# Plot monthly page views time series
+election_ts |>
+  ggplot(aes(x=month, y=views, label = name, colour = name)) +
+  geom_line() +
+  
+  geom_text_repel(
+    data = election_ts |> filter(name == "Justin Trudeau", month == 9),
+    aes(label = "Federal Election on September 20th"),
+    colour = "black",
+    nudge_x = -2.5,
+    nudge_y = -50000,
+    segment.curvature = 0.5,
+    segment.ncp = 5,
+    segment.angle = 90,
+    size = 3,
+    show.legend = FALSE
+  ) +
+  
+  # Set Labels
+  labs(
+    x = "Month",
+    y = "Pageviews",
+    title = "Monthly Wikipedia Page Views by Federal Electoral Candidate in 2021",
+    colour = ""
+  ) +
+  
+  # Set axis scales and plot colours
+  scale_colour_manual(values = leader_colour) +
+  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
+  scale_y_continuous(labels = scales::number) +
+
+  # Set themes
+  theme_minimal() +
+  theme(legend.position = "top", legend.text = element_text(size = 7))
 ```
 
+Figure \@ref(fig:tsleaders), shows the page views of the 2021 Federal election candidates in the months surrounding the election which occurred September 21st, 2021. Notably, every party leader's page views increased substantially in the months preceding the election, supporting the causal connection made between information seeking and party affiliation in Model Section \@ref(causal-relationship). Justin Trudeau, received the greatest number of page views in the months immediately preceding the election, and received substantially more page views than other candidates for the majority of the year. Trudeau's pre-election page views are likely a result of his position as incumbent Prime Minister preceding the election granting greater name recognition and interest, nationally as well as internationally. compared to the other candidates.
+
+The cumulative monthly page views of the five political parties, excluding the counts of the electoral candidates, are shown in Appendix Table \@ref(fig:tsparties). The Green and Bloc Québécois parties received very few page views for the majority of the year, with a small spike into the thousands of page views during September 2021. The New Democratic Party consistently received around 200,000 page views per month and nearly 500,000 in September. Interestingly, the Liberal and Conservative parties received near identical page views for the majority of the year, both climbing to around 1,500,000 page views in September 2021. It should be noted when interpreting the cumulative page views of each party, that the Liberal and Conservative parties comprise the majority of Wikipedia pages in the sample with 3420 and 3504 pages respectively. The New Democratic, Bloc Québécois, and Green parties have a far smaller presence on Wikipedia, with 759, 152, and 21 pages respectively.
+
 \newpage
 
-```{r balance, echo = FALSE, message = FALSE, warning = FALSE}
-# Create a by party balance table (NOTE: Probably Add this in the Appendix, Flip Sideways for Length)
-summary_data <-
-  wiki_data |>
-  mutate(gender = if_else(gender == "male", 1, 0)) |>
-  select(page_views, gender, birthyear, prime_minister, party_leader, minister, party) |>
-  rename(
-    "Page Views" = page_views,
-    "Male (%)" = gender,
-    "Birth Year" = birthyear,
-    "Prime Minister (%)" = prime_minister,
-    "Party Leader (%)" = party_leader,
-    "Minister (%)" = minister
-  )
+## Model Results
 
-datasummary_balance(formula = ~ party, data = summary_data, dinm = FALSE, fmt = "%.3f") |>
+In Table \@ref(tab:models), the *Full* model, which regresses Wikipedia page views on politician birth year, political position, and party affiliations, estimates that on average, relative to New Democratic politicians, and holding birth year constant, Liberal Party affiliation increases page views by 1156.28 (95% CI [-1960.50, 4273.07]), Conservative Party affiliation by 742.20 (95% CI [-2342.60, 3827.00]), Bloc Québécois affiliation by -1616.58 (95% CI [-1960.50, 4273.07]), and Green Party affiliation by 18,465.17 (95% CI [2396.33, 34,534.01]). These estimates are somewhat indicative of trends observed in the data, primarily Liberal politicians receive the greatest number of page views in the sample, followed by Conservatives and New Democratic, with Bloc Québécois politicians receiving the fewest page views. With the exception of the Green Party, the confidence intervals for party effect are relatively wide, containing a range of -1500 to 1500. There is thus little statistical justification to indicate that in the aggregate, party affiliation is a significant indicator of page views. The Green Party, however, is associated with a very substantial increase in page views relative to the mean page views in the sample of 3702.90 (Table \@ref(tab:datasummary)). This effect estimate should be interpreted with skepticism, as multiple linear regression model estimates are easily biased to influential outliers in small samples, such as the case with the sample of Green Party politicians.
+
+The *Full* model adjusted R-Squared ($Adj. R^2 = 0.234$), which provides a measure of the proportion of variability (movement) in the outcome variable, which is explained by variability (movement) in the model regressors, is very slightly greater than that of the $Position$ model ($Adj. R^2 = 0.230$), which includes only political position covariates. This indicates that political position, far more so than political affiliation, predicts politicians' Wikipedia page views in the sample. The *Full* model estimates that, on average, and holding birth year and party affiliation constant, the effect of having held the title of Prime Minister on page views is 262,779.40 (95% CI [247,377.26, 278,181.55]), Party Leader is 69,042.35 (95% CI [61,608.87, 76,475.82]), and Minister is 30,722.04 (95% CI [25,846.14, 35,597.93]). These effect estimates and confidence intervals are similar in the *Position* model. Relative to mean and median page views observed in the full sample, these effect estimates are very large. As with the estimated effect of Green Party affiliation, these estimates should be interpreted very cautiously. Prime Ministers, Party Leaders, and Ministers make up less than 5% of the total sample, shown in Table \@ref(tab:datasummary), and the page views of positioned politicians are highly variable, as depicted in Figure \@ref(fig:viewsdist). Further, the electoral candidates from each of the five political parties are all party leaders, while Justin Trudeau is also a Prime Minister, and are among the largest outlying observations in respect to page views. This combination of high within group variability, large outliers, and small sample sizes are likely to bias the linear regression estimates of political positions' effect on page views.
+
+The *Party* model, which includes only party indicator variables, estimates effects of Liberal and Conservative party affiliation of -607.88 and -1331.61, contrary to expectations and previous observations. In the *Party and Birth Year* model, which adds politicians birth year as a covariate, estimates effects of Liberal and Conservative party affiliation of 2998.03 and 1990.82 respectively, and a modest effect of 75.72 (95% CI [55.19, 96.24]) for birth year. This provides some indication that, as proposed in Model Section \@ref(causal-relationship), birth year confounds the effect of party affiliation on page views. The adjusted R-Squared of the *Party* and *Party and Birth Year* models are 0.002 and 0.008 respectively, further affirming that party affiliation and birth year explain very little variation in politicians' Wikipedia page views.
+
+A large potential source of variability and bias in the model are the large number of politicians in the sample who were not alive in 2021. Under the assumption that voter information seeking, for gaining information relevant to elections and to access party viability, drives increased politician page viewership on Wikipedia, there is little reason to believe that voters would seek information on political candidate who are no longer active or living. Thus, there is not a causal justification, in the models presented here, which relates the party affiliation or position of deceased politicians to Wikipedia page views. To test this claim, the regression models were re-estimated using the sub-sample Wikipedia pages of politicians born after 1920 and with no recorded year of death on Wikipedia. Appendix Table \@ref(tab:modelsrestricted) displays the results of the restricted models. While model fit is slightly increased by restricting the sample in this way (restricted *Full* model $Adj. R^2 = 0.319$), effect estimates and confidence intervals are not substantially different, with the exception of politician birth year for which the restricted *Full* model effect estimate is 477.37 (95% CI [310.55, 644.19]).
+
+```{r models, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Model Results"}
+# Estimate the regression models
+models <- 
+  list(
+    "Party" = 
+      lm(page_views ~ liberal + cp + bq + green, 
+         data = wiki_data
+         ),
+    "Party and Birth Year" = 
+      lm(page_views ~ liberal + cp + bq + green + birthyear, 
+         data = wiki_data |> mutate(birthyear = birthyear - 1950)
+         ),
+    "Position" = 
+      lm(page_views ~ party_leader + prime_minister + minister, 
+         data = wiki_data
+         ),
+    "Full" = 
+      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + birthyear, 
+         data = wiki_data |> mutate(birthyear = birthyear - 1950)
+         )
+)
+
+# Rename variables for display
+coef_map = c(
+  "liberal" = "Liberal",
+  "cp" = "CPC",
+  "bq" = "BQ",
+  "green" = "Green",
+  "prime_minister" = "Prime Minister",
+  "party_leader" = "Party Leader",
+  "minister" = "Minster",
+  "birthyear" = "Birthyear - 1950"
+)
+
+# Define table notes
+notes = "Estimate 95 percent confidence interverals appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise."
+
+# Create model summary table
+modelsummary(
+  models,
+  coef_map = coef_map, 
+  gof_omit = "^(?!R2|Num|F)",
+  statistic = "({conf.low}, {conf.high})",
+  notes = notes,
+  fmt = 2,
+  threeparttable = TRUE,
+  title = "Model Results"
+  ) |>
   kableExtra::landscape() |>
   kable_styling(font_size = 10)
 ```
 
 \newpage
 
-```{r models, echo = FALSE, message = FALSE, warning = FALSE}
-models <- 
-  list(
-    "Party" = lm(page_views ~ liberal + cp + bq + green, data = wiki_data),
-    "Party and Position" = lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister, 
-                    data = wiki_data),
-    "Full" = 
-      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + gender + 
-           birthyear, data = wiki_data |> mutate(birthyear = birthyear - 1950))
-)
+## Model Assumptions
 
-coef_map = c(
-  "liberal" = "Liberal",
-  "cp" = "CPC",
-  "bq" = "BQ",
-  "green" = "Green",
-  "prime_minister" = "Prime Minister",
-  "party_leader" = "Party Leader",
-  "minister" = "Minster",
-  "gender" = "Male",
-  "birthyear" = "Birthyear - 1950"
-)
-
-notes = "Estimate standard error appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise. Male is an indicator equal to 1 if the politician is male and 0 otherwise."
-
-modelsummary(
-  models,
-  coef_map = coef_map, 
-  gof_omit = "^(?!R2|Num)",
-  notes = notes,
-  threeparttable = TRUE
+```{r performance, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 8, fig.cap = "Evaluation of Full Model Assuptions"}
+# Evaluate the Performance of the full model -----------------------------------
+performance::check_model(
+    x = models$Full,
+    check = c("qq", "linearity", "homogeneity", "outliers")
   )
 ```
 
+To perform valid statistical and causal inference, regression models must satisfy a number of important assumptions. Critically, the functional form of the regression models used in this paper are explicitly linear and thus the underlying relationship between Wikipedia page views and politicians' characteristics is assumed to be linear as well. The error term $\epsilon$ is also assumed to be random and independent of regressors in the model. In particular, $\epsilon$ is often assumed to be distributed normally, with 0 mean and constant variance. Systematic deviations of $\epsilon$ from this mean indicate non-linearity in the model and non-constant variance of the error term jeopardizes the validity of statistical inference, particularly in small sample settings.
 
-```{r modelsrestricted, echo = FALSE, message = FALSE, warning = FALSE}
-models_restricted <- 
-  list(
-    "Party" = lm(page_views ~ liberal + cp + bq + green, 
-                 data = wiki_data |> 
-                   filter(!(name %in% electoral_candidates))
-                 ),
-    "Party and Position" = lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister, 
-                    data = wiki_data |> 
-                      filter(!(name %in% electoral_candidates))
-                    ),
-    "Full" = 
-      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + gender + 
-           birthyear, 
-         data = wiki_data |> 
-           mutate(birthyear = birthyear - 1950) |> 
-           filter(!(name %in% electoral_candidates))
-         )
+Figure \@ref(fig:performance) depicts a number of graphical checks for the linearity and error assumptions of the unrestricted *Full* model discussed in the Model Results Section \@ref(model-results). In Figure \@ref(fig:performance), the model residuals, the difference between the actual page views of each Wikipedia page and those which are predicted by the model, are used to estimate $\epsilon$. The *Full* model fails the visual diagnostic tests for normality, linearity, and constant (homogeneous) error variance. In particular, error variance increases systematically as page views increase, indicating a non-linear relationship between regressors and page views in the model. Additionally, Figure \@ref(fig:performance) provides evidence of influential outliers in the sample which, as noted previously, bias regression estimates.
+
+Appendix Figure \@ref(fig:performanceres) displays the same set of diagnostic tests for the restricted sample *Full* model, which appears less linear than the unrestricted model and contains more influential outlying observations.
+
+# Discussion
+
+As demonstrated by several authors, Wikipedia provides a strong tool for assessing the information seeking behavior, and political intentions, of the voters in North America and Europe [@Yasseri; @Bright; @Smith]. In the single Federal election observed in this paper in Figure \@ref(fig:tsleaders) and Figure \@ref(fig:proportions), the share of Wikipedia page views of political parties and electoral candidates were shown to resemble the popular vote and House of Commons seats share in the 2021 Canadian Federal Election. Further, as demonstrated in Figure \@ref(fig:tsleaders) and Appendix Figure \@ref(fig:tsparties), the Wikipedia page views of Canadian politicians and electoral candidates spiked in the month of and months preceding the 2021 election. This suggests that Canadian voters use Wikipedia to inform themselves on relevant political actors preceding an election, as described by @Salem and @Kam. The results of this initial investigation were not replicated in the subsequent linear regression analysis, the estimates of which suggest that the effect of party affiliation on Wikipedia page views is small or nonexistent. These models, however, were shown in Model Section \@ref(model-assumptions) to be flawed in a number of ways, and subsequent analysis is needed to determine a use case, if any, for using linear models to analyze characteristics of Canadian politicians' Wikipedia pages. 
+ 
+## Limitations
+
+As noted in Model Section \@ref(model-assumptions), the linear regression models estimated in this paper have severe limitations, pertaining to both causal and statistical inference. The expected causal relationship between Canadian politicians' party affiliation and Wikipedia page views in 2021 is not evidenced by the regression models, which estimate very moderate effects of party affiliation for all but the Green Party. Several variables, including the set of political position indicators and the indicator for Green Party affiliation, have small underlying samples of observations. Within the small sub-samples of positioned politicians and Green party members, there are high within group variability of politician page views. Small sample sizes, coupled with high within group variance, likely bias the regression estimates of these parameters and inhibit valid statistical inference. Further, the *Full* regression model specified appears to have non-normally distributed error terms as well as heterogeneous error variance, as indicated by Figure \@ref(fig:performance). Consequently, small sample inference, which relies on a strong assumption of identically distributed normal error terms, is likely invalid for constructing regression estimates of these parameters [@Wooldridge]. Finally, both the unrestricted and restricted models estimated appear non-linear in their parameters and contain influential outlying observations, both of which bias model estimates.
+
+Several sampling factors additionally limit the results of this paper. The failure to collect Wikipedia page views from both French and English sources, as noted in the Data Section \@ref(data), creates a downward bias on the page views of Bloc Québécois affiliated politicians. This problem is difficult to overcome, as introducing additional non-English Wikipedia pages will potentially account for page views of non-Canadian citizens. Including such page views may bias upwards the page views of high ranking and incumbent politicians, who are more likely to appear in foreign press and impact foreign affairs, thus encouraging increased page views from a population outside of the Canadian electorate. The issue of foreign viewership remains in the current sample as well, as there is no way to differentiate between the page views of Canadians and foreign citizens on English language Wikipedia. Thus, several mechanisms by which individuals seek information internationally may be more influential than domestic voter information seeking behavior in determining the page views of Canadian politicians.
+
+## Future Analysis
+
+Future analyses of Canadian politicians' Wikipedia pages may avoid many of the shortcomings of this paper by using more selective sampling strategies. This analysis, which cast a wide net to include all Wikipedia pages of Canadian politicians affiliated with the five major Federal political parties, was hampered by high within group variability, influential outlying observations, and relatively small sub-sample blocks of observations. A more targeted approach, which investigated the Wikipedia page views of a smaller homogeneous set of Canadian politicians, would be subject to fewer such concerns. The sample could, for instance, be limited only to the Wikipedia pages of candidates for prior or subsequent provincial parliament elections. These candidates are more likely to be of similar ages, are certainty still living and practicing politicians, and are likely of similar political positions. Controlling for variability in these factors would allow for a more precise estimate of the effect of political party and of politicians political viability on Wikipedia page views.
+
+Additionally, future work could incorporate time series models into their analysis. Much of the variation in monthly page views of the federal electoral candidates and of politicians in the sample generally is attributable to the spike in page views preceding the 2021 election. It is during this period that Wikipedia page views appear most closely aligned with the proposed model of voter seeking behavior. Thus, analyzing changes in page views over time, and particularly during consequential elections, may provide stronger insight into when and to what extent Wikipedia page views are an accurate indication of voter behavior and attitudes. Such analysis would add to the expanding literature using Wikipedia to predict political and other behaviours, benefitting researchers, pundits, and political organizers in future elections.
+
+\newpage
+
+# Appendix
+
+```{r corr, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Correlation of Regression Variables"}
+# Retrieve the correlation coefficients between regression variables
+correlations <- 
+  cor(
+    x = wiki_data |> 
+      select(page_views, liberal, cp, ndp, bq, green, prime_minister, party_leader, minister, birthyear) |>
+      rename(
+        "Birth Year" = "birthyear",
+        "Minister" = "minister", 
+        "Party Leader" = "party_leader", 
+        "Prime Minister" = "prime_minister",
+        "Green" = "green",
+        "BQ" = "bq", 
+        "NDP" = "ndp", 
+        "CPC" = "cp", 
+        "Liberal" = "liberal", 
+        "Page Views" = "page_views"
+        )
+      ,
+    use="complete.obs"
     )
 
-coef_map = c(
-  "liberal" = "Liberal",
-  "cp" = "CPC",
-  "bq" = "BQ",
-  "green" = "Green",
-  "prime_minister" = "Prime Minister",
-  "party_leader" = "Party Leader",
-  "minister" = "Minster",
-  "gender" = "Male",
-  "birthyear" = "Birthyear - 1950"
-)
-
-notes = "Estimate standard error appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise. Male is an indicator equal to 1 if the politician is male and 0 otherwise."
-
-modelsummary(
-  models_restricted,
-  coef_map = coef_map, 
-  gof_omit = "^(?!R2|Num)",
-  notes = notes,
-  threeparttable = TRUE
-  )
+# Plot a heat-map of the correlations
+ggcorrplot(correlations)
 ```
 
 \newpage
 
-```{r performance, echo = FALSE, message = FALSE, warning = FALSE}
-# Evaluate the Performance of the full model
-performance::check_model(models$Full)
+```{r tsparties, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Total Monthly Wikipedia Page Views by Federal Party in 2021"}
+# Plot the 2021 time series of party page views --------------------------------
+# Summarize total party pageviews
+parties_ts <-
+  wiki_data |>
+  filter(!(name %in% leader_name)) |>
+  group_by(party) |>
+  summarize(across(starts_with("views"), ~sum(.x, na.rm = TRUE))) |>
+  
+  # Pivot to plot time series data by party
+  pivot_longer(
+    cols = starts_with("views"),
+    names_to = "month",
+    names_prefix = "views_m",
+    values_to = "views"
+  ) |>
+  
+  # Create numeric month variable
+  mutate(month = as.numeric(month))
+
+# Plot total party page views by month
+parties_ts |>
+  ggplot(aes(x=month, y=views, colour = party)) +
+  geom_line() +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  
+  # Set Labels
+  labs(
+    x = "Month",
+    y = "Pageviews",
+    title = "Total Monthly Wikipedia Page Views by Federal Party in 2021",
+    subtitle = "Pages of 2021 Federal Electoral Candidates are Ommitted from Totals",
+    colour = ""
+  ) +
+  
+  # Set Scales
+  scale_colour_manual(values = party_colour) +
+  scale_x_discrete(limits = 1:12, labels = month.abb[1:12]) +
+  scale_y_continuous(labels = scales::number)
 ```
 
+\newpage
 
-# Model
+```{r modelsrestricted, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Restricted Model Results"}
+# Estimate the restricted regression models
+models_restricted <- 
+  list(
+    "Party" = 
+      lm(page_views ~ liberal + cp + bq + green, 
+         data = wiki_data |> filter(is.na(deathyear) & birthyear > 1920)
+         ),
+    "Party and Birth Year" = 
+      lm(page_views ~ liberal + cp + bq + green + birthyear, 
+         data = wiki_data |> filter(is.na(deathyear) & birthyear > 1920) |> mutate(birthyear = birthyear - 1950)
+         ),
+    "Position" = 
+      lm(page_views ~ party_leader + prime_minister + minister, 
+         data = wiki_data |> filter(is.na(deathyear) & birthyear > 1920)
+         ),
+    "Full" = 
+      lm(page_views ~ liberal + cp + bq + green + party_leader + prime_minister + minister + birthyear, 
+         data = wiki_data |> filter(is.na(deathyear) & birthyear > 1920) |> mutate(birthyear = birthyear - 1950)
+         )
+    )
 
-# Results
+# Rename variables for display
+coef_map = c(
+  "liberal" = "Liberal",
+  "cp" = "CPC",
+  "bq" = "BQ",
+  "green" = "Green",
+  "prime_minister" = "Prime Minister",
+  "party_leader" = "Party Leader",
+  "minister" = "Minster",
+  "birthyear" = "Birthyear - 1950"
+)
 
-# Discussion
+# Define table notes
+notes = "Politicians born before year 1920 or which have a recorded year of death are omitted from the specification. Estimate 95 percent confidence interverals appears in brackets. Birthyear - 1950, measures the number of years between the politician's year of birth and the year 1950. Liberal, CPC (Conservative Party of Canada), Green, and BQ (Bloc Québécois) are party indicators equal to 1 if the politician is a member of the party, and 0 otherwise. The NDP (New Democratic Party) is excluded from the set of party indicators and is used as the reference group. Prime Minister, Party Leader, and Minister are position indicators equal to 1 if the politician has held that position and 0 otherwise."
 
-# Appendix
+# Create model summary table
+modelsummary(
+  models_restricted,
+  coef_map = coef_map, 
+  gof_omit = "^(?!R2|Num|F)",
+  statistic = "({conf.low}, {conf.high})",
+  notes = notes,
+  fmt = 2,
+  threeparttable = TRUE,
+  title = "Restricted Model Results"
+  ) |>
+  kableExtra::landscape() |>
+  kable_styling(font_size = 10)
+```
+
+\newpage
+
+```{r performanceres, echo = FALSE, message = FALSE, warning = FALSE, fig.width=8, fig.height = 8, fig.cap = "Evaluation of Restricted Full Model Assuptions"}
+# Evaluate the Performance of the restricted model -----------------------------
+performance::check_model(
+    x = models_restricted$Full, 
+    check = c("qq", "linearity", "homogeneity", "outliers")
+  )
+```
+
+\newpage 
 
 # References
 
