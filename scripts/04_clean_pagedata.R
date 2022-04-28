@@ -1,7 +1,9 @@
+# Preamble ---------------------------------------------------------------------
 # Purpose: Clean the data imported using 03_import_pagedata.R.
 # Author: Ethan Sansom
 # Contact: ethan.sansom@mail.utotoronto.ca
-# Date: 2022-04-03
+# Date: April 27, 2021
+# Precondition: Run 03_import_pagedata.R
 
 # Load Packages ----------------------------------------------------------------
 library(tidyverse)

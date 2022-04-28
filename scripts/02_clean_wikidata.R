@@ -1,7 +1,15 @@
+# Preamble ---------------------------------------------------------------------
+# Purpose: Clean the data imported by 01_import_wikidata.R script.
+# Author: Ethan Sansom
+# Contact: ethan.sansom@mail.utotoronto.ca
+# Date: April 27, 2021
+# Precondition: Run 01_import_wikidata.R
+
+# Load Packages ----------------------------------------------------------------
 library(tidyverse)
-library(stringr)
+library(stringr)      # For editing strings
 library(dplyr)
-library(here)
+library(here)         # For file path management
 
 # Load Data --------------------------------------------------------------------
 wiki_data_raw <- read_csv(here("inputs/data/wiki_data_raw.csv"))

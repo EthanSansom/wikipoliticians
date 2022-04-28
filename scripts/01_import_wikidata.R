@@ -4,7 +4,7 @@
 # optional variables for politicians' year of birth/death and gender.
 # Author: Ethan Sansom
 # Contact: ethan.sansom@mail.utotoronto.ca
-# Date: 2022-04-03
+# Date: April 27, 2021
 
 # Load Packages ----------------------------------------------------------------
 library(tidyverse)
