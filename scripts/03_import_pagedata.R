@@ -4,7 +4,7 @@
 # the number of reverted edits over this period (per page) from the XTools website.
 # Author: Ethan Sansom
 # Contact: ethan.sansom@mail.utotoronto.ca
-# Date: April 27, 2021
+# Date: April 27, 2022
 # Precondition: Run 02_clean_wikidata.R
 
 # Load Packages ----------------------------------------------------------------

@@ -2,7 +2,7 @@
 # Purpose: Clean the data imported by 01_import_wikidata.R script.
 # Author: Ethan Sansom
 # Contact: ethan.sansom@mail.utotoronto.ca
-# Date: April 27, 2021
+# Date: April 27, 2022
 # Precondition: Run 01_import_wikidata.R
 
 # Load Packages ----------------------------------------------------------------
