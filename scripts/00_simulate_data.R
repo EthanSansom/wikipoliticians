@@ -1,3 +1,9 @@
+# Preamble ---------------------------------------------------------------------
+# Purpose: Simulate expected data on the Wikipedia pages of Canadian politicians.
+# Author: Ethan Sansom
+# Contact: ethan.sansom@mail.utotoronto.ca
+# Date: April 27, 2021
+
 # Set Up -----------------------------------------------------------------------
 library(tidyverse)
 library(dplyr)
@@ -5,10 +11,10 @@ library(ggplot2)         # Plot Making
 library(ggrepel)         # Adding Point Labels
 library(scales)          # For formatting plot axes
 
+# Set seed for reproducibility
 set.seed(1)
 
 # Simulate Data ----------------------------------------------------------------
-
 # Expected Variable Factors
 parties <- c("NDP", "Liberal", "Green", "CPC", "BQ")
 positions <- c("Other", "Minister", "Prime Minister", "Party Leader", "Minister")
