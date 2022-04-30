@@ -1,3 +1,11 @@
+# Preamble ---------------------------------------------------------------------
+# Purpose: Launch a Shiny app supplement to the paper, which allow users to see
+# the full sample of politicians, their page views, and party affiliation.
+# Author: Ethan Sansom
+# Contact: ethan.sansom@mail.utotoronto.ca
+# Date: April 27, 2021
+
+#  Load Packages ---------------------------------------------------------------
 library(shiny)
 library(dplyr)
 library(tidyverse)
@@ -27,7 +35,7 @@ ui <- shinyUI(fluidPage(
         full paper is available at the GitHub repo below."),
       h5("Information"),
       p("Author: Ethan Sansom"),
-      p("Created: August 27, 2022"),
+      p("Created: April 27, 2022"),
       a("https://github.com/EthanSansom/wikipoliticians")
       ),
     mainPanel(
